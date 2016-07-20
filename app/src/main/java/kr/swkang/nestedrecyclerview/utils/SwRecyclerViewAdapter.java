@@ -43,7 +43,7 @@ public abstract class SwRecyclerViewAdapter<T>
   /**
    * createView()에서 생성한 View와 position의 Data를 기반으로 뷰를 업데이트 한다.
    */
-  protected abstract void bindView(T item, ViewHolder viewHolder);
+  protected abstract void bindView(int viewType, T item, ViewHolder viewHolder);
 
   public void clearItems() {
     if (list != null && !list.isEmpty()) {
@@ -95,7 +95,8 @@ public abstract class SwRecyclerViewAdapter<T>
 
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
-    bindView(getItem(position), holder);
+    final int viewType = getItemViewType(position);
+    bindView(viewType, getItem(position), holder);
   }
 
   @Override
@@ -105,6 +106,10 @@ public abstract class SwRecyclerViewAdapter<T>
 
   public T getItem(@IntRange(from = 0) int position) {
     return ((list != null && position < list.size()) ? list.get(position) : null);
+  }
+
+  public boolean isEmptyList() {
+    return (list == null || list.isEmpty());
   }
 
   public static class ViewHolder

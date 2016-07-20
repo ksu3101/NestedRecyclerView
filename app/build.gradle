@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "23.0.3"
+    dataBinding {
+        enabled = true;
+    }
 
     defaultConfig {
         applicationId "kr.swkang.nestedrecyclerview"
@@ -22,7 +25,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:support-v4:24.0.0'
+    compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:recyclerview-v7:24.0.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
