@@ -32,15 +32,17 @@ public class MainRvAdapter
 
   @Override
   protected View createView(Context context, ViewGroup viewGroup, int viewType) {
-    Log.w(MainRvAdapter.class.getSimpleName(), "//  createView() // viewType = " + viewType);
-
     if (viewType == HeaderContents.VIEWTYPE_VALUE) {
       // 0 == Header contents
       return LayoutInflater.from(context).inflate(R.layout.main_item_header, viewGroup, false);
     }
-    else if (viewType == BodyContents.VIEWTYPE_VALUE) {
-      // BODY contents
-      return LayoutInflater.from(context).inflate(R.layout.main_item_body, viewGroup, false);
+    else if (viewType == BodyContents.FULL_VIEWTYPE_VALUE) {
+      // BODY contents (Span 2)
+      return LayoutInflater.from(context).inflate(R.layout.main_item_body_full, viewGroup, false);
+    }
+    else if (viewType == BodyContents.HALF_VIEWTYPE_VALUE) {
+      // BODY contents (Span 1)
+      return LayoutInflater.from(context).inflate(R.layout.main_item_body_half, viewGroup, false);
     }
     else {
       // list.size() + 1 == Footer contents
@@ -57,13 +59,13 @@ public class MainRvAdapter
       }
     }
 
-    else if (viewType == BodyContents.VIEWTYPE_VALUE) {
+    else if (viewType == BodyContents.FULL_VIEWTYPE_VALUE || viewType == BodyContents.HALF_VIEWTYPE_VALUE) {
       // BODYs
       if (item instanceof BodyContents) {
         BodyContents contents = (BodyContents) item;
 
         TextView tv = (TextView) viewHolder.getView(R.id.main_item_body_tv_section);
-        tv.setText(String.valueOf("BODY " + contents.getSection()));
+        tv.setText(String.valueOf(contents.getSection()));
 
       }
     }
@@ -81,14 +83,17 @@ public class MainRvAdapter
 
   @Override
   public int getItemViewType(int position) {
-
     if (isHeader(position)) {
       return HeaderContents.VIEWTYPE_VALUE;
     }
     else if (isFooter(position)) {
       return FOOTER_LOADMORE;
     }
-    return BodyContents.VIEWTYPE_VALUE;
+    return getBodyViewType(position);
+  }
+
+  public int getBodyViewType(int position) {
+    return (!isEmptyList() ? getItem(position).getContentType().getValue() : BodyContents.FULL_VIEWTYPE_VALUE);
   }
 
   public boolean hasHeader() {

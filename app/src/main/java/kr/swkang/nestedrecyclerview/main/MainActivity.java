@@ -3,7 +3,7 @@ package kr.swkang.nestedrecyclerview.main;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -42,13 +42,6 @@ public class MainActivity
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main_activity);
 
-    // dummy datas
-    ArrayList<Contents> datas = new ArrayList<>();
-    datas.add(new HeaderContents());
-    for (int i = 1; i <= 5; i++) {
-      datas.add(new BodyContents(String.valueOf(i)));
-    }
-
     refreshLayout = (SwipeRefreshLayout) findViewById(R.id.main_swiperefresh);
     refreshLayout.setOnRefreshListener(
         new SwipeRefreshLayout.OnRefreshListener() {
@@ -63,10 +56,45 @@ public class MainActivity
 
     rv = (RecyclerView) findViewById(R.id.main_recyclerview);
     rv.setHasFixedSize(false);
-    rv.setLayoutManager(new LinearLayoutManager(this));
 
+    GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+    gridLayoutManager.setSpanSizeLookup(
+        new GridLayoutManager.SpanSizeLookup() {
+          @Override
+          public int getSpanSize(int position) {
+            if (adapter != null) {
+              final int viewType = adapter.getItemViewType(position);
+              if (viewType == HeaderContents.VIEWTYPE_VALUE) {
+                // HEADER
+                return 2;
+              }
+              else if (viewType == BodyContents.FULL_VIEWTYPE_VALUE) {
+                // BODY / span 2
+                return 2;
+              }
+              else if (viewType == BodyContents.HALF_VIEWTYPE_VALUE) {
+                // BODY / span 1
+                return 1;
+              }
+              else {
+                // FOOTER
+                return 2;
+              }
+            }
+            // default 2
+            return 2;
+          }
+        }
+    );
+
+    rv.setLayoutManager(gridLayoutManager);
+
+    ArrayList<Contents> datas = new ArrayList<>();
     adapter = new MainRvAdapter(this, datas, this);
     rv.setAdapter(adapter);
+
+    // retrieve list datas
+    presenter.retrieveListDatas(false);
 
   }
 

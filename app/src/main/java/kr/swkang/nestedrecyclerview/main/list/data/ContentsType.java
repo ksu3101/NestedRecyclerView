@@ -9,7 +9,8 @@ import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
  */
 public enum ContentsType {
   HEADER(HeaderContents.VIEWTYPE_VALUE),
-  BODY(BodyContents.VIEWTYPE_VALUE);
+  BODY_FULL(BodyContents.FULL_VIEWTYPE_VALUE),
+  BODY_HALF(BodyContents.HALF_VIEWTYPE_VALUE);
 
   private int v;
 
@@ -25,8 +26,10 @@ public enum ContentsType {
     switch (v) {
       case HeaderContents.VIEWTYPE_VALUE:
         return HEADER;
+      case BodyContents.FULL_VIEWTYPE_VALUE:
+        return BODY_FULL;
       default:
-        return BODY;
+        return BODY_HALF;
     }
   }
 

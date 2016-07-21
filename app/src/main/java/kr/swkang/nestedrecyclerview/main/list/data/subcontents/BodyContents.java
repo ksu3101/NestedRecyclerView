@@ -1,6 +1,6 @@
 package kr.swkang.nestedrecyclerview.main.list.data.subcontents;
 
-import android.support.annotation.NonNull;
+import android.support.annotation.IntRange;
 
 import kr.swkang.nestedrecyclerview.main.list.data.Contents;
 import kr.swkang.nestedrecyclerview.main.list.data.ContentsType;
@@ -11,12 +11,13 @@ import kr.swkang.nestedrecyclerview.main.list.data.ContentsType;
  */
 public class BodyContents
     extends Contents {
-  public static final int VIEWTYPE_VALUE = 1;
+  public static final int FULL_VIEWTYPE_VALUE = 1;
+  public static final int HALF_VIEWTYPE_VALUE = 2;
 
   private String section;
 
-  public BodyContents(String sectionHeaderString) {
-    super(ContentsType.BODY);
+  public BodyContents(@IntRange(from = 1, to = 2) int bodyContentsType, String sectionHeaderString) {
+    super(ContentsType.parseFromValue(bodyContentsType));
     this.section = sectionHeaderString;
   }
 
@@ -27,4 +28,5 @@ public class BodyContents
   public void setSection(String section) {
     this.section = section;
   }
+
 }
