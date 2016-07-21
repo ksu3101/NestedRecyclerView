@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+   <TextView
+      android:id="@+id/main_item_body_tv_section"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      android:background="@color/flat_purple"
+      android:gravity="center"
+      android:text="HALF\nBODY"
+      android:textColor="@color/white"
+      android:textSize="20sp"/>
+
+   <!-- section header -->
+   <!--TextView
+      android:id="@+id/main_item_body_tv_section"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/-->
+
+   <!-- Horizontal RecyclerView -->
+   <!--android.support.v7.widget.RecyclerView
+      android:id="@+id/main_item_body_rv_horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/-->
+
+</LinearLayout>

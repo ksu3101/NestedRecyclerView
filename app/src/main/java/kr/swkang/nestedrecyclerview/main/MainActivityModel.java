@@ -25,17 +25,26 @@ public class MainActivityModel
           @Override
           public void call(Subscriber<? super ArrayList<Contents>> subscriber) {
             ArrayList<Contents> result = new ArrayList<>();
+
             if (isLoadMore) {
               // add dummy body datas
-              for (int i = 1; i <= 3; i++) {
-                result.add(new BodyContents(" NEW " + i));
+              for (int i = 1; i <= 4; i++) {
+                result.add(new BodyContents(BodyContents.HALF_VIEWTYPE_VALUE, "NEW " + i));
               }
             }
             else {
               // reset
+
+              // header
               result.add(new HeaderContents());
-              for (int i = 1; i <= 5; i++) {
-                result.add(new BodyContents(String.valueOf(i)));
+
+              // add default 2 sections (span 2)
+              for (int i = 0; i < 2; i++) {
+                result.add(new BodyContents(BodyContents.FULL_VIEWTYPE_VALUE, "SPAN 2 BODY " + i));
+              }
+
+              for (int i = 1; i <= 4; i++) {
+                result.add(new BodyContents(BodyContents.HALF_VIEWTYPE_VALUE, String.valueOf(i)));
               }
             }
 
