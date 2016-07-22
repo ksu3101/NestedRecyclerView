@@ -1,6 +1,6 @@
 package kr.swkang.nestedrecyclerview.main.list.data;
 
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyContents;
+import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
 
 /**
@@ -9,8 +9,9 @@ import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
  */
 public enum ContentsType {
   HEADER(HeaderContents.VIEWTYPE_VALUE),
-  BODY_FULL(BodyContents.FULL_VIEWTYPE_VALUE),
-  BODY_HALF(BodyContents.HALF_VIEWTYPE_VALUE);
+  BODY_FULL(BodySection.FULL_VIEWTYPE_VALUE),
+  BODY_HALF(BodySection.HALF_VIEWTYPE_VALUE),
+  SECTION_HEADER(SectionHeader.VIEWTYPE_VALUE);
 
   private int v;
 
@@ -26,10 +27,12 @@ public enum ContentsType {
     switch (v) {
       case HeaderContents.VIEWTYPE_VALUE:
         return HEADER;
-      case BodyContents.FULL_VIEWTYPE_VALUE:
+      case BodySection.FULL_VIEWTYPE_VALUE:
         return BODY_FULL;
-      default:
+      case BodySection.HALF_VIEWTYPE_VALUE:
         return BODY_HALF;
+      default:
+        return SECTION_HEADER;
     }
   }
 

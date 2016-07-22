@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.swkang.nestedrecyclerview.main.list.data.Contents;
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyContents;
+import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 import kr.swkang.nestedrecyclerview.utils.mvp.BaseView;
 import rx.Subscriber;
@@ -50,9 +50,6 @@ public class MainActivityPresenter
           // get section list datas
           retrieveSectionListDatas();
 
-          // TODO : get static list datas
-          retrieveStaticListDatas();
-
         }
       };
       model.retrieveMainListDatas(subscriber, isLoadMore);
@@ -62,7 +59,7 @@ public class MainActivityPresenter
 
   public void retrieveSectionListDatas() {
     if (model != null) {
-      final Subscriber subscriber = new Subscriber<ArrayList<BodyContents>>() {
+      final Subscriber subscriber = new Subscriber<ArrayList<BodySection>>() {
         @Override
         public void onCompleted() {
         }
@@ -75,7 +72,7 @@ public class MainActivityPresenter
         }
 
         @Override
-        public void onNext(ArrayList<BodyContents> bodyList) {
+        public void onNext(ArrayList<BodySection> bodyList) {
           if (view != null) {
             view.onRetriveSectionListDatas(bodyList);
           }
@@ -87,16 +84,11 @@ public class MainActivityPresenter
     }
   }
 
-  public void retrieveStaticListDatas() {
-
-  }
-
-
   interface View
       extends BaseView {
     void onRetriveMainListItems(@NonNull List<Contents> list, boolean isLoadMore);
 
-    void onRetriveSectionListDatas(@NonNull ArrayList<BodyContents> bodyList);
+    void onRetriveSectionListDatas(@NonNull ArrayList<BodySection> bodyList);
   }
 
 }

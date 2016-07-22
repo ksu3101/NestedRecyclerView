@@ -6,8 +6,11 @@
    <!-- Header viewpager height -->
    <dimen name="header_height">200dp</dimen>
 
-   <!-- First section CardView height -->
-   <dimen name="first_header_cardview_width">120dp</dimen>
-   <dimen name="first_header_cardview_height">150dp</dimen>
+   <!-- section span 2 CardView widtn, height -->
+   <dimen name="section_full_cardview_width">120dp</dimen>
+   <dimen name="section_full_cardview_height">150dp</dimen>
+
+   <!-- half(span 1) CardView height -->
+   <dimen name="half_cardview_height">200dp</dimen>
 
 </resources>

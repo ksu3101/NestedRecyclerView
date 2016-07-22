@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import kr.swkang.nestedrecyclerview.R;
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyContentsItem;
+import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyItems;
 import kr.swkang.nestedrecyclerview.utils.SwRecyclerViewAdapter;
 
 /**
@@ -24,9 +24,9 @@ import kr.swkang.nestedrecyclerview.utils.SwRecyclerViewAdapter;
  * @since 2016/07/22
  */
 public class SectionRvAdapter
-    extends SwRecyclerViewAdapter<BodyContentsItem> {
+    extends SwRecyclerViewAdapter<BodyItems> {
 
-  public SectionRvAdapter(@NonNull Context context, @NonNull List<BodyContentsItem> list) {
+  public SectionRvAdapter(@NonNull Context context, @NonNull List<BodyItems> list) {
     super(context, list);
   }
 
@@ -36,7 +36,7 @@ public class SectionRvAdapter
   }
 
   @Override
-  protected void bindView(int viewType, BodyContentsItem item, ViewHolder viewHolder) {
+  protected void bindView(int viewType, BodyItems item, ViewHolder viewHolder) {
     if (item != null) {
       ImageView ivBg = (ImageView) viewHolder.getView(R.id.main_item_f_section_bg_iv);
       final String imgUrl = item.getThumbnailImgUrl();

@@ -146,6 +146,11 @@ public abstract class SwRecyclerViewAdapter<T>
       views.put(0, view);
     }
 
+    public View findViewById(@IdRes int id) {
+      // 헷갈려서 넣음.
+      return getView(id);
+    }
+
     public View getView(@IdRes int id) {
       if (!views.containsKey(id)) {
         initViewById(id);
