@@ -90,7 +90,7 @@ public class MainActivity
     rv.setLayoutManager(gridLayoutManager);
 
     ArrayList<Contents> datas = new ArrayList<>();
-    adapter = new MainRvAdapter(this, datas, this);
+    adapter = new MainRvAdapter(this, getSupportFragmentManager(), datas, this);
     rv.setAdapter(adapter);
 
     // retrieve list datas
@@ -118,7 +118,7 @@ public class MainActivity
 
   @Override
   public void onClick(@NonNull View v, int position) {
-
+    Toast.makeText(MainActivity.this, "Touched Item [" + position + "]", Toast.LENGTH_SHORT).show();
   }
 
 
