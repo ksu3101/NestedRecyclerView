@@ -77,6 +77,13 @@ public abstract class SwRecyclerViewAdapter<T>
     }
   }
 
+  public void addItem(int position, @NonNull T insertItem) {
+    if (list != null) {
+      list.add(position, insertItem);
+      notifyItemRangeInserted(position, position + 1);
+    }
+  }
+
   public T removeItem(int position) {
     if (list != null) {
       if (position >= 0 && position < list.size()) {
@@ -86,6 +93,16 @@ public abstract class SwRecyclerViewAdapter<T>
       }
     }
     return null;
+  }
+
+  public void replaceItem(int position, T replaceItem) {
+    if (list != null) {
+      if (position >= 0 && position < list.size()) {
+        if (list.set(position, replaceItem) != null) {
+          notifyItemChanged(position);
+        }
+      }
+    }
   }
 
   @Override

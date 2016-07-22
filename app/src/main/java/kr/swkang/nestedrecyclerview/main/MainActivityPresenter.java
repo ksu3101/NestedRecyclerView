@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.swkang.nestedrecyclerview.main.list.data.Contents;
+import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyContents;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 import kr.swkang.nestedrecyclerview.utils.mvp.BaseView;
 import rx.Subscriber;
@@ -27,7 +28,7 @@ public class MainActivityPresenter
     this.model = new MainActivityModel();
   }
 
-  public void retrieveListDatas(final boolean isLoadMore) {
+  public void retrieveMainListDatas(final boolean isLoadMore) {
     if (model != null) {
       final Subscriber subscriber = new Subscriber<ArrayList<Contents>>() {
         @Override
@@ -44,18 +45,58 @@ public class MainActivityPresenter
         @Override
         public void onNext(ArrayList<Contents> resultList) {
           if (view != null) {
-            view.onRetriveListItems(resultList, isLoadMore);
+            view.onRetriveMainListItems(resultList, isLoadMore);
           }
-          onCompleted();
+          // get section list datas
+          retrieveSectionListDatas();
+
+          // TODO : get static list datas
+          retrieveStaticListDatas();
+
         }
       };
-      model.retrieveListDatas(subscriber, isLoadMore);
+      model.retrieveMainListDatas(subscriber, isLoadMore);
       addSubscriber(subscriber);
     }
   }
 
+  public void retrieveSectionListDatas() {
+    if (model != null) {
+      final Subscriber subscriber = new Subscriber<ArrayList<BodyContents>>() {
+        @Override
+        public void onCompleted() {
+        }
+
+        @Override
+        public void onError(Throwable e) {
+          if (view != null) {
+            view.onError(e != null ? e.getMessage() : "ERROR");
+          }
+        }
+
+        @Override
+        public void onNext(ArrayList<BodyContents> bodyList) {
+          if (view != null) {
+            view.onRetriveSectionListDatas(bodyList);
+          }
+          onCompleted();
+        }
+      };
+      model.retrieveSectionListDatas(subscriber);
+      addSubscriber(subscriber);
+    }
+  }
+
+  public void retrieveStaticListDatas() {
+
+  }
+
+
   interface View
       extends BaseView {
-    void onRetriveListItems(@NonNull List<Contents> list, boolean isLoadMore);
+    void onRetriveMainListItems(@NonNull List<Contents> list, boolean isLoadMore);
+
+    void onRetriveSectionListDatas(@NonNull ArrayList<BodyContents> bodyList);
   }
+
 }

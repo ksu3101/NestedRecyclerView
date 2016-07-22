@@ -3,8 +3,8 @@ package kr.swkang.nestedrecyclerview.main.list;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,8 +83,21 @@ public class MainRvAdapter
         BodyContents contents = (BodyContents) item;
 
         TextView tv = (TextView) viewHolder.getView(R.id.main_item_body_tv_section);
-        tv.setText(String.valueOf(contents.getSection()));
+        tv.setText(contents.getSectionHeader() != null ? contents.getSectionHeader() : "");
 
+        if (viewType == BodyContents.FULL_VIEWTYPE_VALUE) {
+          RecyclerView rv = (RecyclerView) viewHolder.getView(R.id.main_item_body_rv_horizontal);
+          rv.setHasFixedSize(true);
+          rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+
+          SectionRvAdapter adapter = new SectionRvAdapter(context, contents.getBodyContentsItems());
+          rv.setAdapter(adapter);
+
+        }
+        else {
+          //
+
+        }
       }
     }
 

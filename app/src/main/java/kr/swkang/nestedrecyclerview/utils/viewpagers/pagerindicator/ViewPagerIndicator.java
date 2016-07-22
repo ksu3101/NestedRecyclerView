@@ -7,7 +7,6 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -109,6 +108,7 @@ public class ViewPagerIndicator
       this.size = realCount;
       vp.removeOnPageChangeListener(this);
       vp.addOnPageChangeListener(this);
+      this.currentPosition = (vp.getCurrentItem() & size);
 
       initializeIndicators();
     }
@@ -165,7 +165,6 @@ public class ViewPagerIndicator
     for (int i = 0; i < indicators.size(); i++) {
       indicators.get(i).setImageResource(i == (currentPosition % size) ? selectedItemDrawable : normalItemDrawable);
     }
-    Log.w("ViewPagerIndicator", "/// onPageSelected() // position = " + position);
   }
 
   @Override
