@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import kr.swkang.nestedrecyclerview.main.list.data.Contents;
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyContents;
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyContentsItem;
+import kr.swkang.nestedrecyclerview.main.list.data.SectionHeader;
+import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodySection;
+import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyItems;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
 import kr.swkang.nestedrecyclerview.utils.mvp.BaseModel;
 import rx.Observable;
@@ -72,9 +73,10 @@ public class MainActivityModel
             if (isLoadMore) {
               // add dummy body datas
               for (int i = 1; i <= 2; i++) {
-                result.add(new BodyContents(BodyContents.HALF_VIEWTYPE_VALUE, "NEW " + i));
+                result.add(new BodyItems(i, "http://designmodo.com/wp-content/uploads/2013/07/Long-Shadows.jpg", "Soda pop confusion", "New"));
               }
             }
+
             else {
               // reset
 
@@ -83,12 +85,13 @@ public class MainActivityModel
 
               // add default 2 sections (span 2)
               for (int i = 0; i < 2; i++) {
-                result.add(new BodyContents(BodyContents.FULL_VIEWTYPE_VALUE, "" + i));
+                result.add(new SectionHeader("" + i));
+                result.add(new BodySection());
               }
 
               // add items (span 1)
-              for (int i = 1; i <= 8; i++) {
-                result.add(new BodyContents(BodyContents.HALF_VIEWTYPE_VALUE, String.valueOf(i)));
+              for (int i = 1; i <= 10; i++) {
+                result.add(new BodyItems(i, "http://designmodo.com/wp-content/uploads/2013/07/m.jpg", "For the Emperor, brothers!!", "Dsco"));
               }
             }
 
@@ -96,37 +99,37 @@ public class MainActivityModel
           }
         }
     );
-    observable.delay(1500, TimeUnit.MILLISECONDS)
+    observable//.delay(1500, TimeUnit.MILLISECONDS)
               .subscribeOn(Schedulers.computation())
               .observeOn(AndroidSchedulers.mainThread())
               .subscribe(subscriber);
   }
 
-  public void retrieveSectionListDatas(Subscriber<ArrayList<BodyContents>> subscriber) {
-    Observable<ArrayList<BodyContents>> observable = Observable.create(
-        new Observable.OnSubscribe<ArrayList<BodyContents>>() {
+  public void retrieveSectionListDatas(Subscriber<ArrayList<BodySection>> subscriber) {
+    Observable<ArrayList<BodySection>> observable = Observable.create(
+        new Observable.OnSubscribe<ArrayList<BodySection>>() {
           @Override
-          public void call(Subscriber<? super ArrayList<BodyContents>> subscriber) {
-            ArrayList<BodyContents> result = new ArrayList<>();
+          public void call(Subscriber<? super ArrayList<BodySection>> subscriber) {
+            ArrayList<BodySection> result = new ArrayList<>();
 
-            ArrayList<BodyContentsItem> firstSectionResult = new ArrayList<>();
+            ArrayList<BodyItems> firstSectionResult = new ArrayList<>();
             // [1] get dummy datas
             for (int i = 0; i < imgs.length; i++) {
-              firstSectionResult.add(new BodyContentsItem(
+              firstSectionResult.add(new BodyItems(
                   i + 1, imgs[i], txts[i], ""));
             }
-            BodyContents firstSection = new BodyContents(BodyContents.FULL_VIEWTYPE_VALUE, "Section 1");
-            firstSection.setBodyContentsItems(firstSectionResult);
+            BodySection firstSection = new BodySection();
+            firstSection.setBodyItemses(firstSectionResult);
             result.add(firstSection);
 
-            ArrayList<BodyContentsItem> secondSectionResult = new ArrayList<>();
+            ArrayList<BodyItems> secondSectionResult = new ArrayList<>();
             // [2] get dummy datas
             for (int i = 0; i < imgs.length; i++) {
-              secondSectionResult.add(new BodyContentsItem(
+              secondSectionResult.add(new BodyItems(
                   i + 1, imgs[Math.abs(imgs.length - i - 1)], txts[Math.abs(imgs.length - i - 1)], ""));
             }
-            BodyContents secondSection = new BodyContents(BodyContents.FULL_VIEWTYPE_VALUE, "Section 2");
-            secondSection.setBodyContentsItems(secondSectionResult);
+            BodySection secondSection = new BodySection();
+            secondSection.setBodyItemses(secondSectionResult);
             result.add(secondSection);
 
             subscriber.onNext(result);

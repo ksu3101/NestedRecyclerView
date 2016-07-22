@@ -16,7 +16,7 @@ import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.main.list.MainRvAdapter;
 import kr.swkang.nestedrecyclerview.main.list.data.Contents;
 import kr.swkang.nestedrecyclerview.main.list.data.ContentsType;
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyContents;
+import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
 import kr.swkang.nestedrecyclerview.utils.BaseActivity;
 import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
@@ -69,11 +69,11 @@ public class MainActivity
                 // HEADER
                 return 2;
               }
-              else if (viewType == BodyContents.FULL_VIEWTYPE_VALUE) {
+              else if (viewType == BodySection.FULL_VIEWTYPE_VALUE) {
                 // BODY / span 2
                 return 2;
               }
-              else if (viewType == BodyContents.HALF_VIEWTYPE_VALUE) {
+              else if (viewType == BodySection.HALF_VIEWTYPE_VALUE) {
                 // BODY / span 1
                 return 1;
               }
@@ -117,13 +117,11 @@ public class MainActivity
   }
 
   @Override
-  public void onRetriveSectionListDatas(@NonNull ArrayList<BodyContents> bodyList) {
-    Log.w(TAG, "// onRetriveSectionListDatas() // bodyList size() = " + bodyList.size());
+  public void onRetriveSectionListDatas(@NonNull ArrayList<BodySection> bodyList) {
     if (adapter != null) {
       for (int i = 1; i <= bodyList.size(); i++) {
         if (i - 1 < adapter.getItemCount()) {
-          BodyContents c = bodyList.get(i - 1);
-          Log.w(TAG, "// onRetriveSectionListDatas() // [" + i + "] " + c.getBodyContentsItems().size() + ", " + c.getContentType().name());
+          BodySection c = bodyList.get(i - 1);
           if (c.getContentType() == ContentsType.BODY_FULL) {
             // 이미 추가된 포지션에 Full body일 경우 -> replace
             adapter.replaceItem(i, c);
