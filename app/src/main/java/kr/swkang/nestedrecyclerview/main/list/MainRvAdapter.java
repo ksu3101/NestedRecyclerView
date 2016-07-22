@@ -2,6 +2,8 @@ package kr.swkang.nestedrecyclerview.main.list;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +13,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import kr.swkang.nestedrecyclerview.R;
+import kr.swkang.nestedrecyclerview.main.header.HeaderViewPagerAdapter;
 import kr.swkang.nestedrecyclerview.main.list.data.Contents;
 import kr.swkang.nestedrecyclerview.main.list.data.ContentsType;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyContents;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
 import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
 import kr.swkang.nestedrecyclerview.utils.SwRecyclerViewAdapter;
+import kr.swkang.nestedrecyclerview.utils.viewpagers.InfinitePagerAdapter;
+import kr.swkang.nestedrecyclerview.utils.viewpagers.InfiniteViewPager;
+import kr.swkang.nestedrecyclerview.utils.viewpagers.pagerindicator.ViewPagerIndicator;
 
 /**
  * @author KangSung-Woo
@@ -26,8 +32,11 @@ public class MainRvAdapter
     extends SwRecyclerViewAdapter<Contents> {
   public static final int FOOTER_LOADMORE = 99;
 
-  public MainRvAdapter(@NonNull Context context, @NonNull ArrayList<Contents> list, OnViewClickListener clickListener) {
+  private FragmentManager fm;
+
+  public MainRvAdapter(@NonNull Context context, @NonNull FragmentManager fm, @NonNull ArrayList<Contents> list, OnViewClickListener clickListener) {
     super(context, list, clickListener);
+    this.fm = fm;
   }
 
   @Override
@@ -55,6 +64,15 @@ public class MainRvAdapter
     if (viewType == HeaderContents.VIEWTYPE_VALUE) {
       if (item instanceof HeaderContents) {
         HeaderContents contents = (HeaderContents) item;
+
+        InfiniteViewPager vp = (InfiniteViewPager) viewHolder.getView(R.id.main_item_header_viewpager);
+        InfinitePagerAdapter wrrappedAdapter = new InfinitePagerAdapter(new HeaderViewPagerAdapter(fm, contents.getItemList()));
+        vp.setAdapter(wrrappedAdapter);
+        vp.setTag(wrrappedAdapter);
+
+        ViewPagerIndicator indicator = (ViewPagerIndicator) viewHolder.getView(R.id.main_item_header_vp_indicator);
+        indicator.setCircleMarginDP(6);
+        indicator.setViewPager(vp, wrrappedAdapter.getRealCount());
 
       }
     }

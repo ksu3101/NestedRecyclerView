@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="@dimen/header_height"
+                android:background="@color/black"
                 android:orientation="vertical">
 
-   <TextView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@color/flat_emerald"
-      android:gravity="center"
-      android:text="HEADER"
-      android:textColor="@color/white"
-      android:textSize="32sp"/>
-
-   <!--android.support.v4.view.ViewPager
+   <kr.swkang.nestedrecyclerview.utils.viewpagers.InfiniteViewPager
       android:id="@+id/main_item_header_viewpager"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"/ -->
+      android:layout_height="match_parent"/>
 
-   <!-- TODO : view pager indicator -->
-
+   <!-- view pager indicator -->
+   <kr.swkang.nestedrecyclerview.utils.viewpagers.pagerindicator.ViewPagerIndicator
+      android:id="@+id/main_item_header_vp_indicator"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="30dp"
+      android:gravity="center"/>
 
 </RelativeLayout>
