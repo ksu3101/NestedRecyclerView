@@ -2,28 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:paddingBottom="12dp"
+              android:paddingTop="12dp">
+
 
    <TextView
       android:id="@+id/main_item_body_tv_section"
       android:layout_width="match_parent"
-      android:layout_height="200dp"
-      android:background="@color/flat_river"
-      android:gravity="center"
-      android:text="BODY"
-      android:textColor="@color/white"
-      android:textSize="20sp"/>
-
-   <!-- section header -->
-   <!--TextView
-      android:id="@+id/main_item_body_tv_section"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/-->
+      android:layout_height="wrap_content"
+      android:paddingBottom="4dp"
+      android:paddingLeft="14dp"
+      android:paddingRight="14dp"
+      android:paddingTop="6dp"
+      android:textColor="@color/black"
+      android:textSize="16sp"
+      android:textStyle="bold"/>
 
    <!-- Horizontal RecyclerView -->
-   <!--android.support.v7.widget.RecyclerView
+   <android.support.v7.widget.RecyclerView
       android:id="@+id/main_item_body_rv_horizontal"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"/-->
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:clipToPadding="false"
+      android:paddingLeft="12dp"
+      android:paddingRight="12dp"
+      android:scrollbars="none"/>
 
 </LinearLayout>

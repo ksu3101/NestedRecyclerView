@@ -14,16 +14,4 @@
       android:textColor="@color/white"
       android:textSize="20sp"/>
 
-   <!-- section header -->
-   <!--TextView
-      android:id="@+id/main_item_body_tv_section"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/-->
-
-   <!-- Horizontal RecyclerView -->
-   <!--android.support.v7.widget.RecyclerView
-      android:id="@+id/main_item_body_rv_horizontal"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/-->
-
 </LinearLayout>
