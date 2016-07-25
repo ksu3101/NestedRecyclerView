@@ -13,9 +13,10 @@ Nested RecyclerView example project.
 ### 3. Todo   
 - [x] Header에 sliding ViewPager, ViewPager indicator 적용.  
 - [x] Body에 Nested RecyclerView(Horizontal, CardView)적용. 
-- [ ] apply static Bodys.    
+- [x] apply static Bodys.    
+- [x] apply ItemDecorations. 
 - [ ] enable `Load More`pattern. 
 
-### 3. guide
+### 4. guide
 ![guide image](https://github.com/ksu3101/TIL/blob/master/Android/images/nested_rv_guide.png)
 
