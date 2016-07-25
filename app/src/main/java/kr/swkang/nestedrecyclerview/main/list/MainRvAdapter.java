@@ -144,9 +144,6 @@ public class MainRvAdapter
       if (isHeader(position)) {
         return HeaderContents.VIEWTYPE_VALUE;
       }
-      else if (isFooter(position)) {
-        return FOOTER_LOADMORE;
-      }
       else if (getItem(position) instanceof BodySection) {
         return BodySection.FULL_VIEWTYPE_VALUE;
       }
