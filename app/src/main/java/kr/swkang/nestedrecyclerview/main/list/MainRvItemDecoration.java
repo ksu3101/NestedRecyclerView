@@ -34,7 +34,6 @@ public class MainRvItemDecoration
     int position = parent.getChildAdapterPosition(view);
     int viewType = parent.getAdapter().getItemViewType(position);
 
-
     if (viewType == HeaderContents.VIEWTYPE_VALUE) {
       // 0 == Header contents
     }
@@ -55,9 +54,9 @@ public class MainRvItemDecoration
         MainRvAdapter adapter = (MainRvAdapter) a;
         // if it last item
         int count = adapter.getItemCount();
-        if (adapter.isFooter(adapter.getItemCount())) {
+        if (adapter.isFooter(count - 1)) {
           // has Footer
-          count = count - 1;
+          count = count - 2;
         }
         if (position > count - 2) {
           outRect.bottom = defaultBottomMargin;
