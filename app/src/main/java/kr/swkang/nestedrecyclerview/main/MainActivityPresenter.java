@@ -47,9 +47,6 @@ public class MainActivityPresenter
           if (view != null) {
             view.onRetriveMainListItems(resultList, isLoadMore);
           }
-          // get section list datas
-          retrieveSectionListDatas();
-
         }
       };
       model.retrieveMainListDatas(subscriber, isLoadMore);
@@ -57,38 +54,9 @@ public class MainActivityPresenter
     }
   }
 
-  public void retrieveSectionListDatas() {
-    if (model != null) {
-      final Subscriber subscriber = new Subscriber<ArrayList<BodySection>>() {
-        @Override
-        public void onCompleted() {
-        }
-
-        @Override
-        public void onError(Throwable e) {
-          if (view != null) {
-            view.onError(e != null ? e.getMessage() : "ERROR");
-          }
-        }
-
-        @Override
-        public void onNext(ArrayList<BodySection> bodyList) {
-          if (view != null) {
-            view.onRetriveSectionListDatas(bodyList);
-          }
-          onCompleted();
-        }
-      };
-      model.retrieveSectionListDatas(subscriber);
-      addSubscriber(subscriber);
-    }
-  }
-
   interface View
       extends BaseView {
     void onRetriveMainListItems(@NonNull List<Contents> list, boolean isLoadMore);
-
-    void onRetriveSectionListDatas(@NonNull ArrayList<BodySection> bodyList);
   }
 
 }

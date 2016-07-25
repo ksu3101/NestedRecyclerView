@@ -4,4 +4,5 @@
       android:angle="270"
       android:endColor="@color/transparent_heavy_black"
       android:startColor="@color/transparent"/>
+   <corners android:radius="@dimen/cardview_def_corner_radius"/>
 </shape>

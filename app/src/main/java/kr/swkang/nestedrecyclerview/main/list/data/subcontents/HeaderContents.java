@@ -1,5 +1,7 @@
 package kr.swkang.nestedrecyclerview.main.list.data.subcontents;
 
+import android.os.Parcel;
+
 import java.util.ArrayList;
 
 import kr.swkang.nestedrecyclerview.main.list.data.Contents;
@@ -34,4 +36,32 @@ public class HeaderContents
   public void setItemList(ArrayList<HeaderContentsItem> itemList) {
     this.itemList = itemList;
   }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    super.writeToParcel(dest, flags);
+    dest.writeTypedList(this.itemList);
+  }
+
+  protected HeaderContents(Parcel in) {
+    super(in);
+    this.itemList = in.createTypedArrayList(HeaderContentsItem.CREATOR);
+  }
+
+  public static final Creator<HeaderContents> CREATOR = new Creator<HeaderContents>() {
+    @Override
+    public HeaderContents createFromParcel(Parcel source) {
+      return new HeaderContents(source);
+    }
+
+    @Override
+    public HeaderContents[] newArray(int size) {
+      return new HeaderContents[size];
+    }
+  };
 }
