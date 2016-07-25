@@ -139,26 +139,25 @@ public class MainRvAdapter
   } // end of bindView() methods
 
   @Override
-  public int getItemCount() {
-    int count = super.getItemCount();
-    return (count > 0 ? ++count : count); // list가 비어있지 않을 경우 footer를 붙임.
-  }
-
-  @Override
   public int getItemViewType(int position) {
-    if (isHeader(position)) {
-      return HeaderContents.VIEWTYPE_VALUE;
+    if (getItem(position) != null) {
+      if (isHeader(position)) {
+        return HeaderContents.VIEWTYPE_VALUE;
+      }
+      else if (isFooter(position)) {
+        return FOOTER_LOADMORE;
+      }
+      else if (getItem(position) instanceof BodySection) {
+        return BodySection.FULL_VIEWTYPE_VALUE;
+      }
+      else if (getItem(position) instanceof BodyItems) {
+        return BodySection.HALF_VIEWTYPE_VALUE;
+      }
+      return SectionHeader.VIEWTYPE_VALUE;
     }
-    else if (isFooter(position)) {
+    else {
       return FOOTER_LOADMORE;
     }
-    else if (getItem(position) instanceof BodySection) {
-      return BodySection.FULL_VIEWTYPE_VALUE;
-    }
-    else if (getItem(position) instanceof BodyItems) {
-      return BodySection.HALF_VIEWTYPE_VALUE;
-    }
-    return SectionHeader.VIEWTYPE_VALUE;
   }
 
   public int getFirstHalfBodyContentsPosition() {
@@ -170,12 +169,12 @@ public class MainRvAdapter
     return -1;
   }
 
-  public void showFooter() {
-
+  public void showLoadMore() {
+    //addItem(null);
   }
 
-  public void hideFooter() {
-
+  public void hideLoadMore() {
+    //removeItem(list.size() - 1);
   }
 
   public boolean hasHeader() {

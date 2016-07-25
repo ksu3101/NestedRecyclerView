@@ -79,7 +79,7 @@ public class MainActivityModel
 
             if (isLoadMore) {
               // add dummy body datas
-              for (int i = 1; i <= 2; i++) {
+              for (int i = 1; i <= 10; i++) {
                 result.add(getRandomBodyItems(i, new Random()));
               }
             }
@@ -92,8 +92,7 @@ public class MainActivityModel
           }
         }
     );
-    observable//.delay(1500, TimeUnit.MILLISECONDS)
-              .subscribeOn(Schedulers.computation())
+    observable.subscribeOn(Schedulers.computation())
               .observeOn(AndroidSchedulers.mainThread())
               .subscribe(subscriber);
   }
