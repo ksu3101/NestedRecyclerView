@@ -14,6 +14,7 @@ import java.util.List;
 
 import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.main.list.MainRvAdapter;
+import kr.swkang.nestedrecyclerview.main.list.MainRvItemDecoration;
 import kr.swkang.nestedrecyclerview.main.list.data.Contents;
 import kr.swkang.nestedrecyclerview.main.list.data.ContentsType;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodySection;
@@ -78,7 +79,7 @@ public class MainActivity
                 return 1;
               }
               else {
-                // FOOTER
+                // FOOTER, SECTION HEADERS
                 return 2;
               }
             }
@@ -89,6 +90,9 @@ public class MainActivity
     );
 
     rv.setLayoutManager(gridLayoutManager);
+    MainRvItemDecoration itemDeco = new MainRvItemDecoration(this);
+    rv.removeItemDecoration(itemDeco);
+    rv.addItemDecoration(itemDeco);
 
     ArrayList<Contents> datas = new ArrayList<>();
     adapter = new MainRvAdapter(this, getSupportFragmentManager(), datas, this);
@@ -107,31 +111,13 @@ public class MainActivity
         adapter.addItems(list);
       }
       else {
-        Toast.makeText(MainActivity.this, "Refresh Complete", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, "Refresh Complete", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onRetriveMainListItems() // Refresh Complete. ");
         adapter.setItem(list, true);
       }
     }
     if (refreshLayout != null) {
       refreshLayout.setRefreshing(false);
-    }
-  }
-
-  @Override
-  public void onRetriveSectionListDatas(@NonNull ArrayList<BodySection> bodyList) {
-    if (adapter != null) {
-      for (int i = 1; i <= bodyList.size(); i++) {
-        if (i - 1 < adapter.getItemCount()) {
-          BodySection c = bodyList.get(i - 1);
-          if (c.getContentType() == ContentsType.BODY_FULL) {
-            // 이미 추가된 포지션에 Full body일 경우 -> replace
-            adapter.replaceItem(i, c);
-          }
-          else {
-            // 새로운 body추가
-            adapter.addItem(i, bodyList.get(i - 1));
-          }
-        }
-      }
     }
   }
 

@@ -3,6 +3,11 @@
    <dimen name="activity_horizontal_margin">16dp</dimen>
    <dimen name="activity_vertical_margin">16dp</dimen>
 
+   <!-- default cardview corner radius -->
+   <dimen name="cardview_def_corner_radius">5dp</dimen>
+   <!-- default cardview elevation -->
+   <dimen name="cardview_def_elevation">2dp</dimen>
+
    <!-- Header viewpager height -->
    <dimen name="header_height">200dp</dimen>
 
@@ -12,5 +17,12 @@
 
    <!-- half(span 1) CardView height -->
    <dimen name="half_cardview_height">200dp</dimen>
+
+   <dimen name="rv_def_left_margin">10dp</dimen>
+   <dimen name="rv_def_right_margin">10dp</dimen>
+   <dimen name="rv_def_top_margin">10dp</dimen>
+   <dimen name="rv_def_bottom_margin">10dp</dimen>
+
+   <dimen name="subrv_hor_gap_size">6dp</dimen>
 
 </resources>

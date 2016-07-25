@@ -1,6 +1,9 @@
 package kr.swkang.nestedrecyclerview.main;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import kr.swkang.nestedrecyclerview.main.list.data.Contents;
@@ -63,6 +66,10 @@ public class MainActivityModel
       "Kids", "Number one", "Plastic", "Bawlings", "Dsco", "Soda pop confusion",
   };
 
+  private static String[] categories = new String[]{
+      "Game", "Movie", "Utility", "Photo", "Video", "Study", "For kids"
+  };
+
   public void retrieveMainListDatas(Subscriber<ArrayList<Contents>> subscriber, final boolean isLoadMore) {
     Observable<ArrayList<Contents>> observable = Observable.create(
         new Observable.OnSubscribe<ArrayList<Contents>>() {
@@ -73,26 +80,12 @@ public class MainActivityModel
             if (isLoadMore) {
               // add dummy body datas
               for (int i = 1; i <= 2; i++) {
-                result.add(new BodyItems(i, "http://designmodo.com/wp-content/uploads/2013/07/Long-Shadows.jpg", "Soda pop confusion", "New"));
+                result.add(getRandomBodyItems(i, new Random()));
               }
             }
-
             else {
-              // reset
-
-              // header
-              result.add(new HeaderContents());
-
-              // add default 2 sections (span 2)
-              for (int i = 0; i < 2; i++) {
-                result.add(new SectionHeader("" + i));
-                result.add(new BodySection());
-              }
-
-              // add items (span 1)
-              for (int i = 1; i <= 10; i++) {
-                result.add(new BodyItems(i, "http://designmodo.com/wp-content/uploads/2013/07/m.jpg", "For the Emperor, brothers!!", "Dsco"));
-              }
+              // refresh list items [ DUMMY DATAS ]
+              result = retrieveDummyDatas();
             }
 
             subscriber.onNext(result);
@@ -105,40 +98,54 @@ public class MainActivityModel
               .subscribe(subscriber);
   }
 
-  public void retrieveSectionListDatas(Subscriber<ArrayList<BodySection>> subscriber) {
-    Observable<ArrayList<BodySection>> observable = Observable.create(
-        new Observable.OnSubscribe<ArrayList<BodySection>>() {
-          @Override
-          public void call(Subscriber<? super ArrayList<BodySection>> subscriber) {
-            ArrayList<BodySection> result = new ArrayList<>();
+  private ArrayList<Contents> retrieveDummyDatas() {
+    ArrayList<Contents> result = new ArrayList<>();
+    Random r = new Random();
 
-            ArrayList<BodyItems> firstSectionResult = new ArrayList<>();
-            // [1] get dummy datas
-            for (int i = 0; i < imgs.length; i++) {
-              firstSectionResult.add(new BodyItems(
-                  i + 1, imgs[i], txts[i], ""));
-            }
-            BodySection firstSection = new BodySection();
-            firstSection.setBodyItemses(firstSectionResult);
-            result.add(firstSection);
+    // put header
+    result.add(new HeaderContents());
 
-            ArrayList<BodyItems> secondSectionResult = new ArrayList<>();
-            // [2] get dummy datas
-            for (int i = 0; i < imgs.length; i++) {
-              secondSectionResult.add(new BodyItems(
-                  i + 1, imgs[Math.abs(imgs.length - i - 1)], txts[Math.abs(imgs.length - i - 1)], ""));
-            }
-            BodySection secondSection = new BodySection();
-            secondSection.setBodyItemses(secondSectionResult);
-            result.add(secondSection);
+    // add first section header
+    result.add(new SectionHeader("Section 1"));
 
-            subscriber.onNext(result);
-          }
-        }
-    );
-    observable.subscribeOn(Schedulers.computation())
-              .observeOn(AndroidSchedulers.mainThread())
-              .subscribe(subscriber);
+    // insert first section body items.
+    ArrayList<BodyItems> firstSectionResult = new ArrayList<>();
+    // [1] get dummy datas
+    for (int i = 0; i < imgs.length; i++) {
+      firstSectionResult.add(new BodyItems(
+          i + 1, imgs[i], txts[i], ""));
+    }
+    BodySection firstSection = new BodySection();
+    firstSection.setBodyItemses(firstSectionResult);
+    result.add(firstSection);   // put result array list
+
+    // add second section header
+    result.add(new SectionHeader("Section 2"));
+
+    // insert second section body items.
+    ArrayList<BodyItems> secondSectionResult = new ArrayList<>();
+    // [2] get dummy datas
+    for (int i = 0; i < imgs.length; i++) {
+      secondSectionResult.add(new BodyItems(
+          i + 1, imgs[Math.abs(imgs.length - i - 1)], txts[Math.abs(imgs.length - i - 1)], ""));
+    }
+    BodySection secondSection = new BodySection();
+    secondSection.setBodyItemses(secondSectionResult);
+    result.add(secondSection);    // put result array list
+
+    // add third section header
+    result.add(new SectionHeader("Section 3"));
+
+    // add default normal items  [SPAN 1]
+    for (int i = 1; i <= 10; i++) {
+      result.add(getRandomBodyItems(i, r));
+    }
+
+    return result;
+  }
+
+  private BodyItems getRandomBodyItems(int i, @NonNull Random r) {
+    return new BodyItems(i, imgs[r.nextInt(imgs.length)], txts[r.nextInt(txts.length)], categories[r.nextInt(categories.length)]);
   }
 
 }
