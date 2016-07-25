@@ -2,7 +2,7 @@
 Nested RecyclerView example project.
 
 ### 1. Description  
-- Header, Body, Footer 로 이루어진 RecyclerView의 구현.  
+- Header, Body, Footer 로 이루어진 Multiple ViewType RecyclerView의 구현 예제.  
 - MVP패턴 적용. RxAndroid사용. 
 
 ### 2. Used modules
