@@ -16,7 +16,6 @@ import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.main.list.MainRvAdapter;
 import kr.swkang.nestedrecyclerview.main.list.MainRvItemDecoration;
 import kr.swkang.nestedrecyclerview.main.list.data.Contents;
-import kr.swkang.nestedrecyclerview.main.list.data.ContentsType;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
 import kr.swkang.nestedrecyclerview.utils.BaseActivity;
@@ -98,15 +97,41 @@ public class MainActivity
     adapter = new MainRvAdapter(this, getSupportFragmentManager(), datas, this);
     rv.setAdapter(adapter);
 
+    rv.addOnScrollListener(
+        new RecyclerView.OnScrollListener() {
+          @Override
+          public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+
+            if (adapter != null && recyclerView.getLayoutManager() != null && recyclerView.getLayoutManager() instanceof GridLayoutManager) {
+              GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
+              if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
+                // load next page..
+                Log.d(TAG, "///// START LOAD MORE");
+                retrieveMainListDatas(true);
+              }
+            }
+          }
+        }
+    );
+
     // retrieve list datas
-    presenter.retrieveMainListDatas(false);
+    retrieveMainListDatas(false);
 
   }
 
+  private void retrieveMainListDatas(boolean isLoadMore) {
+    if (adapter != null) {
+      adapter.showLoadMore();
+      presenter.retrieveMainListDatas(isLoadMore);
+    }
+  }
 
   @Override
   public void onRetriveMainListItems(@NonNull List<Contents> list, boolean isLoadMore) {
     if (adapter != null) {
+      adapter.hideLoadMore();
+
       if (isLoadMore) {
         adapter.addItems(list);
       }
@@ -118,6 +143,9 @@ public class MainActivity
     }
     if (refreshLayout != null) {
       refreshLayout.setRefreshing(false);
+    }
+    if (presenter != null) {
+      presenter.setLoading(false);
     }
   }
 
