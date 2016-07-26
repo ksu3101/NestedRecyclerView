@@ -82,16 +82,25 @@ public class MainActivityModel
               for (int i = 1; i <= 10; i++) {
                 result.add(getRandomBodyItems(i, new Random()));
               }
+              // some running operations
+              try {
+                Thread.sleep(TimeUnit.SECONDS.toMillis(2));
+
+              } catch (InterruptedException ie) {
+                subscriber.onError(ie);
+              } finally {
+                subscriber.onNext(result);
+              }
             }
             else {
               // refresh list items [ DUMMY DATAS ]
               result = retrieveDummyDatas();
+              subscriber.onNext(result);
             }
-
-            subscriber.onNext(result);
           }
         }
     );
+
     observable.subscribeOn(Schedulers.computation())
               .observeOn(AndroidSchedulers.mainThread())
               .subscribe(subscriber);

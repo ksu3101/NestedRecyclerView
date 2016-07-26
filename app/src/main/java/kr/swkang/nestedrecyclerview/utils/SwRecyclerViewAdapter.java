@@ -95,11 +95,15 @@ public abstract class SwRecyclerViewAdapter<T>
     return null;
   }
 
+  public T removeLast() {
+    return removeItem(list != null ? list.size() - 1 : -1);
+  }
+
   public void replaceItem(int position, T replaceItem) {
     if (list != null) {
       if (position >= 0 && position < list.size()) {
         if (list.set(position, replaceItem) != null) {
-          notifyItemChanged(position);
+          notifyItemRemoved(position);
         }
       }
     }

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,11 +168,17 @@ public class MainRvAdapter
   }
 
   public void showLoadMore() {
-    //addItem(null);
+    if (!isEmptyList() && getItem(list.size() - 1) != null) {
+      addItem(null);
+      Log.d("////////", "/// showLoadMore() // addItem() - add Footer. ");
+    }
+    Log.d("////////", "/// showLoadMore() // addItem() // list.size() = " + list.size());
   }
 
   public void hideLoadMore() {
-    //removeItem(list.size() - 1);
+    Log.d("////////", "/// hideLoadMore() // BEFORE // list.size() = " + list.size());
+    removeLast();
+    Log.d("////////", "/// hideLoadMore() // AFTER // removeLast() // list.size() = " + list.size());
   }
 
   public boolean hasHeader() {

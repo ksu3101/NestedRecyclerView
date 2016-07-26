@@ -44,17 +44,24 @@ public class MainActivityPresenter
         final Subscriber subscriber = new Subscriber<ArrayList<Contents>>() {
           @Override
           public void onCompleted() {
+            isLoading = false;
+            if (view != null && isLoadMore) {
+              view.loadMoreCompleted();
+            }
           }
 
           @Override
           public void onError(Throwable e) {
+            isLoading = false;
             if (view != null) {
               view.onError(e != null ? e.getMessage() : "ERROR");
+              if (isLoadMore) view.loadMoreCompleted();
             }
           }
 
           @Override
           public void onNext(ArrayList<Contents> resultList) {
+            onCompleted();
             if (view != null) {
               view.onRetriveMainListItems(resultList, isLoadMore);
             }
@@ -63,6 +70,9 @@ public class MainActivityPresenter
         model.retrieveMainListDatas(subscriber, isLoadMore);
         addSubscriber(subscriber);
         isLoading = true;
+        if (view != null) {
+          view.startLoadMore();
+        }
       }
       else {
         Log.w(MainActivityPresenter.class.getSimpleName(), "// plz wait. is loading..");
@@ -73,6 +83,10 @@ public class MainActivityPresenter
   interface View
       extends BaseView {
     void onRetriveMainListItems(@NonNull List<Contents> list, boolean isLoadMore);
+
+    void startLoadMore();
+
+    void loadMoreCompleted();
   }
 
 }
