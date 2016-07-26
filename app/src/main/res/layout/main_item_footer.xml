@@ -6,6 +6,7 @@
               android:orientation="horizontal">
 
    <ProgressBar
+      android:id="@+id/main_item_footer_pb"
       style="@style/Widget.AppCompat.ProgressBar"
       android:layout_width="60dp"
       android:layout_height="60dp"

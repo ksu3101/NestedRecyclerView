@@ -130,8 +130,6 @@ public class MainActivity
   @Override
   public void onRetriveMainListItems(@NonNull List<Contents> list, boolean isLoadMore) {
     if (adapter != null) {
-      adapter.hideLoadMore();
-
       if (isLoadMore) {
         adapter.addItems(list);
       }
@@ -143,6 +141,20 @@ public class MainActivity
     }
     if (refreshLayout != null) {
       refreshLayout.setRefreshing(false);
+    }
+  }
+
+  @Override
+  public void startLoadMore() {
+    if (adapter != null) {
+      adapter.showLoadMore();
+    }
+  }
+
+  @Override
+  public void loadMoreCompleted() {
+    if (adapter != null) {
+      adapter.hideLoadMore();
     }
     if (presenter != null) {
       presenter.setLoading(false);

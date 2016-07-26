@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -127,6 +128,8 @@ public class MainRvAdapter
 
     else if (viewType == FOOTER_LOADMORE) {
       // FOOTER -> Load more (Contents item is Null)
+      ProgressBar pb = (ProgressBar) viewHolder.getView(R.id.main_item_footer_pb);
+      pb.setIndeterminate(true);
     }
 
     else {
@@ -167,11 +170,13 @@ public class MainRvAdapter
   }
 
   public void showLoadMore() {
-    //addItem(null);
+    if (!isEmptyList() && getItem(list.size() - 1) != null) {
+      addItem(null);
+    }
   }
 
   public void hideLoadMore() {
-    //removeItem(list.size() - 1);
+    removeLast();
   }
 
   public boolean hasHeader() {
