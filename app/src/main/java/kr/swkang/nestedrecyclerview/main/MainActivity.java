@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
 import kr.swkang.nestedrecyclerview.utils.BaseActivity;
 import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
+import kr.swkang.nestedrecyclerview.utils.SwRecyclerView;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 
 public class MainActivity
@@ -29,7 +31,7 @@ public class MainActivity
 
   private MainActivityPresenter presenter;
   private SwipeRefreshLayout    refreshLayout;
-  private RecyclerView          rv;
+  private SwRecyclerView        rv;
   private MainRvAdapter         adapter;
 
   @Override
@@ -55,7 +57,7 @@ public class MainActivity
         }
     );
 
-    rv = (RecyclerView) findViewById(R.id.main_recyclerview);
+    rv = (SwRecyclerView) findViewById(R.id.main_recyclerview);
     rv.setHasFixedSize(false);
 
     GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
@@ -97,6 +99,8 @@ public class MainActivity
     adapter = new MainRvAdapter(this, getSupportFragmentManager(), datas, this);
     rv.setAdapter(adapter);
 
+    rv.setEmptyView(findViewById(R.id.main_emptyview_container));
+
     rv.addOnScrollListener(
         new RecyclerView.OnScrollListener() {
           @Override
@@ -115,8 +119,19 @@ public class MainActivity
         }
     );
 
+    TextView tvRefresh = (TextView) findViewById(R.id.main_emptyview_btn_refresh);
+    tvRefresh.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            // refresh datas
+            retrieveMainListDatas(false);
+          }
+        }
+    );
+
     // retrieve list datas
-    retrieveMainListDatas(false);
+    //retrieveMainListDatas(false);
 
   }
 
