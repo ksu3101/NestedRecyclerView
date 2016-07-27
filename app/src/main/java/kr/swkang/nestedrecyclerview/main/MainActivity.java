@@ -21,7 +21,7 @@ import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
 import kr.swkang.nestedrecyclerview.utils.BaseActivity;
 import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
-import kr.swkang.nestedrecyclerview.utils.SwRecyclerView;
+import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerView;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 
 public class MainActivity

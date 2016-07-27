@@ -26,7 +26,9 @@ import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyItems;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
 import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
-import kr.swkang.nestedrecyclerview.utils.SwRecyclerViewAdapter;
+import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerViewAdapter;
+import kr.swkang.nestedrecyclerview.utils.rvs.snappy.SnapRecyclerView;
+import kr.swkang.nestedrecyclerview.utils.rvs.snappy.SnappyLinearLayoutManager;
 import kr.swkang.nestedrecyclerview.utils.viewpagers.InfinitePagerAdapter;
 import kr.swkang.nestedrecyclerview.utils.viewpagers.InfiniteViewPager;
 import kr.swkang.nestedrecyclerview.utils.viewpagers.pagerindicator.ViewPagerIndicator;
@@ -95,9 +97,9 @@ public class MainRvAdapter
       if (item instanceof BodySection) {
         BodySection bodyItem = (BodySection) item;
 
-        RecyclerView rv = (RecyclerView) viewHolder.getView(R.id.main_item_body_rv_horizontal);
+        SnapRecyclerView rv = (SnapRecyclerView) viewHolder.getView(R.id.main_item_body_rv_horizontal);
         rv.setHasFixedSize(true);
-        rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        rv.setLayoutManager(new SnappyLinearLayoutManager(context, SnappyLinearLayoutManager.HORIZONTAL, false));
         rv.removeItemDecoration(subHorRvItemDecoration);
         rv.addItemDecoration(subHorRvItemDecoration);
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyItems;
-import kr.swkang.nestedrecyclerview.utils.SwRecyclerViewAdapter;
+import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerViewAdapter;
 
 /**
  * Span 2 section / RecyclerView adapter

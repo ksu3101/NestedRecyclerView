@@ -5,7 +5,8 @@
               android:orientation="vertical">
 
    <!-- Horizontal RecyclerView -->
-   <android.support.v7.widget.RecyclerView
+   <!--android.support.v7.widget.RecyclerView -->
+   <kr.swkang.nestedrecyclerview.utils.rvs.snappy.SnapRecyclerView
       android:id="@+id/main_item_body_rv_horizontal"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
