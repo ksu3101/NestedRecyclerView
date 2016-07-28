@@ -22,7 +22,7 @@ Nested RecyclerView example project.
 - [x] apply `ItemDecorations`. 
 - [x] enable `Load More`pattern. [link](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/main/MainActivity.java#L100), [Adapter methods](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/main/list/MainRvAdapter.java#L172)
 - [x] apply `Empty View`. 
-- [ ] enable `Snappy` Horizontal RecyclerView scroll(fling). 
+- [x] enable `Snappy` Horizontal RecyclerView scroll(fling). [참고](http://stackoverflow.com/questions/26370289/snappy-scrolling-in-recyclerview)
 
 ### 4. guide
 ![guide image](https://github.com/ksu3101/TIL/blob/master/Android/images/nested_rv_guide.png)
