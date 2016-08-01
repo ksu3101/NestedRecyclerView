@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContents;
 import kr.swkang.nestedrecyclerview.utils.BaseActivity;
 import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
+import kr.swkang.nestedrecyclerview.utils.rvs.SwOnScrollListener;
 import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerView;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 
@@ -29,10 +32,11 @@ public class MainActivity
     implements MainActivityPresenter.View, OnViewClickListener {
   private static final String TAG = MainActivity.class.getSimpleName();
 
-  private MainActivityPresenter presenter;
-  private SwipeRefreshLayout    refreshLayout;
-  private SwRecyclerView        rv;
-  private MainRvAdapter         adapter;
+  private static Picasso               picasso;
+  private        MainActivityPresenter presenter;
+  private        SwipeRefreshLayout    refreshLayout;
+  private        SwRecyclerView        rv;
+  private        MainRvAdapter         adapter;
 
   @Override
   public BasePresenter attachPresenter() {
@@ -102,7 +106,7 @@ public class MainActivity
     rv.setEmptyView(findViewById(R.id.main_emptyview_container));
 
     rv.addOnScrollListener(
-        new RecyclerView.OnScrollListener() {
+        new SwOnScrollListener(this) {
           @Override
           public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
