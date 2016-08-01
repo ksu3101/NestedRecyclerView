@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +31,11 @@ public class MainActivity
     implements MainActivityPresenter.View, OnViewClickListener {
   private static final String TAG = MainActivity.class.getSimpleName();
 
-  private MainActivityPresenter presenter;
-  private SwipeRefreshLayout    refreshLayout;
-  private SwRecyclerView        rv;
-  private MainRvAdapter         adapter;
+  private static Picasso               picasso;
+  private        MainActivityPresenter presenter;
+  private        SwipeRefreshLayout    refreshLayout;
+  private        SwRecyclerView        rv;
+  private        MainRvAdapter         adapter;
 
   @Override
   public BasePresenter attachPresenter() {
@@ -103,6 +106,27 @@ public class MainActivity
 
     rv.addOnScrollListener(
         new RecyclerView.OnScrollListener() {
+          @Override
+          public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            picasso = Picasso.with(MainActivity.this);
+            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+              picasso.resumeTag(MainActivity.this);
+            }
+            else if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
+              rv.postDelayed(
+                  new Runnable() {
+                    @Override
+                    public void run() {
+                      picasso.resumeTag(MainActivity.this);
+                    }
+                  }
+                  , 500);   // settling delay
+            }
+            else {
+              picasso.pauseTag(MainActivity.this);
+            }
+          }
+
           @Override
           public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
