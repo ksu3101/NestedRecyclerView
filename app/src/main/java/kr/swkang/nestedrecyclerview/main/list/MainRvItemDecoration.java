@@ -4,12 +4,11 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import kr.swkang.nestedrecyclerview.R;
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodySection;
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
+import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodySection;
+import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContents;
 
 /**
  * @author KangSung-Woo

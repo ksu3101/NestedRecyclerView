@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import kr.swkang.nestedrecyclerview.R;
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodyItems;
+import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodyItems;
 import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerViewAdapter;
 
 /**

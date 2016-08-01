@@ -1,4 +1,4 @@
-package kr.swkang.nestedrecyclerview.main.list.data;
+package kr.swkang.nestedrecyclerview.main.list.model;
 
 import android.os.Parcel;
 
@@ -8,13 +8,28 @@ import android.os.Parcel;
  */
 public class SectionHeader
     extends Contents {
-  public static final int VIEWTYPE_VALUE = 999;
+  public static final int                    VIEWTYPE_VALUE = 999;
+  public static final Creator<SectionHeader> CREATOR        = new Creator<SectionHeader>() {
+    @Override
+    public SectionHeader createFromParcel(Parcel source) {
+      return new SectionHeader(source);
+    }
 
+    @Override
+    public SectionHeader[] newArray(int size) {
+      return new SectionHeader[size];
+    }
+  };
   private String title;
 
   public SectionHeader(String title) {
     super(ContentsType.SECTION_HEADER);
     this.title = title;
+  }
+
+  protected SectionHeader(Parcel in) {
+    super(in);
+    this.title = in.readString();
   }
 
   public String getTitle() {
@@ -24,7 +39,6 @@ public class SectionHeader
   public void setTitle(String title) {
     this.title = title;
   }
-
 
   @Override
   public int describeContents() {
@@ -36,22 +50,5 @@ public class SectionHeader
     super.writeToParcel(dest, flags);
     dest.writeString(this.title);
   }
-
-  protected SectionHeader(Parcel in) {
-    super(in);
-    this.title = in.readString();
-  }
-
-  public static final Creator<SectionHeader> CREATOR = new Creator<SectionHeader>() {
-    @Override
-    public SectionHeader createFromParcel(Parcel source) {
-      return new SectionHeader(source);
-    }
-
-    @Override
-    public SectionHeader[] newArray(int size) {
-      return new SectionHeader[size];
-    }
-  };
 }
 
