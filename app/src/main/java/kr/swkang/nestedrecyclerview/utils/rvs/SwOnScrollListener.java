@@ -38,6 +38,7 @@ public abstract class SwOnScrollListener
             picasso.resumeTag(context);
           }
         };
+        recyclerView.postDelayed(settlingResumeRunnable, 500);
       }
       else {
         picasso.pauseTag(context);
