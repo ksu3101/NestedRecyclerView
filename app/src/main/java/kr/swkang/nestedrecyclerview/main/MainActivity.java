@@ -23,6 +23,7 @@ import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContents;
 import kr.swkang.nestedrecyclerview.utils.BaseActivity;
 import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
+import kr.swkang.nestedrecyclerview.utils.rvs.SwOnScrollListener;
 import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerView;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 
@@ -105,28 +106,7 @@ public class MainActivity
     rv.setEmptyView(findViewById(R.id.main_emptyview_container));
 
     rv.addOnScrollListener(
-        new RecyclerView.OnScrollListener() {
-          @Override
-          public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            picasso = Picasso.with(MainActivity.this);
-            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-              picasso.resumeTag(MainActivity.this);
-            }
-            else if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
-              rv.postDelayed(
-                  new Runnable() {
-                    @Override
-                    public void run() {
-                      picasso.resumeTag(MainActivity.this);
-                    }
-                  }
-                  , 500);   // settling delay
-            }
-            else {
-              picasso.pauseTag(MainActivity.this);
-            }
-          }
-
+        new SwOnScrollListener(this) {
           @Override
           public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
