@@ -1,4 +1,4 @@
-package kr.swkang.nestedrecyclerview.main.list.data;
+package kr.swkang.nestedrecyclerview.main.list.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -13,6 +13,10 @@ public class Contents
 
   public Contents(ContentsType contentType) {
     this.contentType = contentType;
+  }
+
+  protected Contents(Parcel in) {
+    this.contentType = ContentsType.parseFromValue(in.readInt());
   }
 
   public ContentsType getContentType() {
@@ -31,10 +35,6 @@ public class Contents
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(contentType.getValue());
-  }
-
-  protected Contents(Parcel in) {
-    this.contentType = ContentsType.parseFromValue(in.readInt());
   }
 
 }

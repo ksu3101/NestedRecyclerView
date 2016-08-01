@@ -1,4 +1,4 @@
-package kr.swkang.nestedrecyclerview.main.list.data.subcontents;
+package kr.swkang.nestedrecyclerview.main.list.model.subcontents;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,6 +9,17 @@ import android.os.Parcelable;
  */
 public class HeaderContentsItem
     implements Parcelable {
+  public static final Parcelable.Creator<HeaderContentsItem> CREATOR = new Parcelable.Creator<HeaderContentsItem>() {
+    @Override
+    public HeaderContentsItem createFromParcel(Parcel source) {
+      return new HeaderContentsItem(source);
+    }
+
+    @Override
+    public HeaderContentsItem[] newArray(int size) {
+      return new HeaderContentsItem[size];
+    }
+  };
   private int    position;
   private String imageUrl;
   private String linkUrl;
@@ -17,6 +28,12 @@ public class HeaderContentsItem
     this.position = position;
     this.imageUrl = imageUrl;
     this.linkUrl = linkUrl;
+  }
+
+  protected HeaderContentsItem(Parcel in) {
+    this.position = in.readInt();
+    this.imageUrl = in.readString();
+    this.linkUrl = in.readString();
   }
 
   public int getPosition() {
@@ -43,7 +60,6 @@ public class HeaderContentsItem
     this.linkUrl = linkUrl;
   }
 
-
   @Override
   public int describeContents() {
     return 0;
@@ -55,22 +71,4 @@ public class HeaderContentsItem
     dest.writeString(this.imageUrl);
     dest.writeString(this.linkUrl);
   }
-
-  protected HeaderContentsItem(Parcel in) {
-    this.position = in.readInt();
-    this.imageUrl = in.readString();
-    this.linkUrl = in.readString();
-  }
-
-  public static final Parcelable.Creator<HeaderContentsItem> CREATOR = new Parcelable.Creator<HeaderContentsItem>() {
-    @Override
-    public HeaderContentsItem createFromParcel(Parcel source) {
-      return new HeaderContentsItem(source);
-    }
-
-    @Override
-    public HeaderContentsItem[] newArray(int size) {
-      return new HeaderContentsItem[size];
-    }
-  };
 }

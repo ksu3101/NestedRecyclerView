@@ -1,11 +1,11 @@
-package kr.swkang.nestedrecyclerview.main.list.data.subcontents;
+package kr.swkang.nestedrecyclerview.main.list.model.subcontents;
 
 import android.os.Parcel;
 
 import java.util.ArrayList;
 
-import kr.swkang.nestedrecyclerview.main.list.data.Contents;
-import kr.swkang.nestedrecyclerview.main.list.data.ContentsType;
+import kr.swkang.nestedrecyclerview.main.list.model.Contents;
+import kr.swkang.nestedrecyclerview.main.list.model.ContentsType;
 
 /**
  * @author KangSung-Woo
@@ -13,8 +13,18 @@ import kr.swkang.nestedrecyclerview.main.list.data.ContentsType;
  */
 public class HeaderContents
     extends Contents {
-  public static final int VIEWTYPE_VALUE = 0;
+  public static final int                     VIEWTYPE_VALUE = 0;
+  public static final Creator<HeaderContents> CREATOR        = new Creator<HeaderContents>() {
+    @Override
+    public HeaderContents createFromParcel(Parcel source) {
+      return new HeaderContents(source);
+    }
 
+    @Override
+    public HeaderContents[] newArray(int size) {
+      return new HeaderContents[size];
+    }
+  };
   private ArrayList<HeaderContentsItem> itemList;
 
   public HeaderContents() {
@@ -27,6 +37,11 @@ public class HeaderContents
     itemList.add(new HeaderContentsItem(3, "http://burkdog.cafe24.com/wp/wp-content/uploads/2015/11/IMG_1302.jpg", ""));
     itemList.add(new HeaderContentsItem(4, "http://burkdog.cafe24.com/wp/wp-content/uploads/2015/11/IMG_1333.jpg", ""));
     itemList.add(new HeaderContentsItem(5, "http://burkdog.cafe24.com/wp/wp-content/uploads/2015/11/IMG_1340.jpg", ""));
+  }
+
+  protected HeaderContents(Parcel in) {
+    super(in);
+    this.itemList = in.createTypedArrayList(HeaderContentsItem.CREATOR);
   }
 
   public ArrayList<HeaderContentsItem> getItemList() {
@@ -47,21 +62,4 @@ public class HeaderContents
     super.writeToParcel(dest, flags);
     dest.writeTypedList(this.itemList);
   }
-
-  protected HeaderContents(Parcel in) {
-    super(in);
-    this.itemList = in.createTypedArrayList(HeaderContentsItem.CREATOR);
-  }
-
-  public static final Creator<HeaderContents> CREATOR = new Creator<HeaderContents>() {
-    @Override
-    public HeaderContents createFromParcel(Parcel source) {
-      return new HeaderContents(source);
-    }
-
-    @Override
-    public HeaderContents[] newArray(int size) {
-      return new HeaderContents[size];
-    }
-  };
 }

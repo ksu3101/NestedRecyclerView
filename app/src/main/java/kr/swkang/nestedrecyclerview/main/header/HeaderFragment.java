@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.main.MainActivity;
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContentsItem;
+import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContentsItem;
 
 /**
  * @author KangSung-Woo

@@ -1,10 +1,10 @@
-package kr.swkang.nestedrecyclerview.main.list.data.subcontents;
+package kr.swkang.nestedrecyclerview.main.list.model.subcontents;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import kr.swkang.nestedrecyclerview.main.list.data.Contents;
-import kr.swkang.nestedrecyclerview.main.list.data.ContentsType;
+import kr.swkang.nestedrecyclerview.main.list.model.Contents;
+import kr.swkang.nestedrecyclerview.main.list.model.ContentsType;
 
 /**
  * @author KangSung-Woo
@@ -13,6 +13,17 @@ import kr.swkang.nestedrecyclerview.main.list.data.ContentsType;
 public class BodyItems
     extends Contents
     implements Parcelable {
+  public static final Parcelable.Creator<BodyItems> CREATOR = new Parcelable.Creator<BodyItems>() {
+    @Override
+    public BodyItems createFromParcel(Parcel source) {
+      return new BodyItems(source);
+    }
+
+    @Override
+    public BodyItems[] newArray(int size) {
+      return new BodyItems[size];
+    }
+  };
   private int    id;
   private String thumbnailImgUrl;
   private String title;
@@ -24,6 +35,14 @@ public class BodyItems
     this.thumbnailImgUrl = thumbnailImgUrl;
     this.title = title;
     this.desc = desc;
+  }
+
+  protected BodyItems(Parcel in) {
+    super(in);
+    this.id = in.readInt();
+    this.thumbnailImgUrl = in.readString();
+    this.title = in.readString();
+    this.desc = in.readString();
   }
 
   public int getId() {
@@ -70,24 +89,4 @@ public class BodyItems
     dest.writeString(this.title);
     dest.writeString(this.desc);
   }
-
-  protected BodyItems(Parcel in) {
-    super(in);
-    this.id = in.readInt();
-    this.thumbnailImgUrl = in.readString();
-    this.title = in.readString();
-    this.desc = in.readString();
-  }
-
-  public static final Parcelable.Creator<BodyItems> CREATOR = new Parcelable.Creator<BodyItems>() {
-    @Override
-    public BodyItems createFromParcel(Parcel source) {
-      return new BodyItems(source);
-    }
-
-    @Override
-    public BodyItems[] newArray(int size) {
-      return new BodyItems[size];
-    }
-  };
 }

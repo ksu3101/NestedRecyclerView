@@ -1,7 +1,7 @@
-package kr.swkang.nestedrecyclerview.main.list.data;
+package kr.swkang.nestedrecyclerview.main.list.model;
 
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.BodySection;
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContents;
+import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodySection;
+import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContents;
 
 /**
  * @author KangSung-Woo
@@ -19,10 +19,6 @@ public enum ContentsType {
     this.v = v;
   }
 
-  public int getValue() {
-    return v;
-  }
-
   public static ContentsType parseFromValue(int v) {
     switch (v) {
       case HeaderContents.VIEWTYPE_VALUE:
@@ -34,6 +30,10 @@ public enum ContentsType {
       default:
         return SECTION_HEADER;
     }
+  }
+
+  public int getValue() {
+    return v;
   }
 
 }

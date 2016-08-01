@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.swkang.nestedrecyclerview.main.list.data.subcontents.HeaderContentsItem;
+import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContentsItem;
 
 /**
  * @author KangSung-Woo
