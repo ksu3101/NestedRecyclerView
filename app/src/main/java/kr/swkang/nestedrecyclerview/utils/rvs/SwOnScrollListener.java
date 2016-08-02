@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import kr.swkang.nestedrecyclerview.main.MainActivity;
-
 /**
  * @author KangSung-Woo
  * @since 2016/08/01
