@@ -1,30 +1,35 @@
 package kr.swkang.nestedrecyclerview.utils.mvp;
 
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
 import rx.Subscriber;
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
  * @author KangSung-Woo
  * @since 2016/07/07
  */
-public class BasePresenter {
-  private CompositeSubscription compositeSubscriptionl;
+public class BasePresenter<T> {
+  private CompositeSubscription compositeSubscription;
 
   public BasePresenter() {
-    this.compositeSubscriptionl = new CompositeSubscription();
+    this.compositeSubscription = new CompositeSubscription();
   }
 
-  public <T> void addSubscriber(@NonNull Subscriber<T> subscriber) {
-    if (compositeSubscriptionl != null) {
-      compositeSubscriptionl.add(subscriber);
+  @CallSuper
+  public Subscription addSubscriber(@NonNull final Subscription subscriber) {
+    if (compositeSubscription != null) {
+      compositeSubscription.add(subscriber);
     }
+    return subscriber;
   }
 
+  @CallSuper
   public void destroy() {
-    if (compositeSubscriptionl != null) {
-      compositeSubscriptionl.unsubscribe();
+    if (compositeSubscription != null) {
+      compositeSubscription.unsubscribe();
     }
   }
 

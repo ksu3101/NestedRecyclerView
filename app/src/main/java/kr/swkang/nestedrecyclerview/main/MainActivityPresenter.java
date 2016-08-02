@@ -13,6 +13,7 @@ import kr.swkang.nestedrecyclerview.main.list.model.SectionHeader;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodyItems;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContents;
+import kr.swkang.nestedrecyclerview.utils.SwObservable;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 import kr.swkang.nestedrecyclerview.utils.mvp.BaseView;
 import rx.Observable;
@@ -26,6 +27,7 @@ import rx.schedulers.Schedulers;
  */
 public class MainActivityPresenter
     extends BasePresenter {
+  private static final String TAG = MainActivityPresenter.class.getSimpleName();
 
   private static String[] imgs       = new String[]{
       "http://burkdog.cafe24.com/wp/wp-content/uploads/2016/06/rxjk.jpg",
@@ -90,7 +92,8 @@ public class MainActivityPresenter
 
   public void retrieveMainListDatas(final boolean isLoadMore) {
     if (!isLoading) {
-      final Subscriber subscriber = new Subscriber<ArrayList<Contents>>() {
+      /*
+      final Subscriber<ArrayList<Contents>> subscriber = new Subscriber<ArrayList<Contents>>() {
         @Override
         public void onCompleted() {
           isLoading = false;
@@ -103,7 +106,7 @@ public class MainActivityPresenter
         public void onError(Throwable e) {
           isLoading = false;
           if (view != null) {
-            view.onError(e != null ? e.getMessage() : "ERROR");
+            view.onError(TAG, e != null ? e.getMessage() : "ERROR");
             if (isLoadMore) view.loadMoreCompleted();
           }
         }
@@ -115,8 +118,70 @@ public class MainActivityPresenter
             view.onRetriveMainListItems(resultList, isLoadMore);
           }
         }
-      };
+      }; */
 
+      SwObservable observable = new SwObservable(
+          this,
+          Observable.create(
+              new Observable.OnSubscribe<ArrayList<Contents>>() {
+                @Override
+                public void call(Subscriber<? super ArrayList<Contents>> subscriber) {
+                  ArrayList<Contents> result = new ArrayList<>();
+
+                  if (isLoadMore) {
+                    // add dummy body datas
+                    for (int i = 1; i <= 10; i++) {
+                      result.add(getRandomBodyItems(i, new Random()));
+                    }
+                    // some running operations
+                    try {
+                      Thread.sleep(TimeUnit.SECONDS.toMillis(2));
+
+                    } catch (InterruptedException ie) {
+                      subscriber.onError(ie);
+                    } finally {
+                      subscriber.onNext(result);
+                    }
+                  }
+                  else {
+                    // refresh list items [ DUMMY DATAS ]
+                    result = retrieveDummyDatas();
+                    subscriber.onNext(result);
+                  }
+                }
+              }
+          ).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+      );
+      observable.subscribe(
+          new Subscriber<ArrayList<Contents>>() {
+            @Override
+            public void onCompleted() {
+              isLoading = false;
+              if (view != null && isLoadMore) {
+                view.loadMoreCompleted();
+              }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+              isLoading = false;
+              if (view != null) {
+                view.onError(TAG, e != null ? e.getMessage() : "ERROR");
+                if (isLoadMore) view.loadMoreCompleted();
+              }
+            }
+
+            @Override
+            public void onNext(ArrayList<Contents> resultList) {
+              onCompleted();
+              if (view != null) {
+                view.onRetriveMainListItems(resultList, isLoadMore);
+              }
+            }
+          }
+      );
+
+      /*
       Observable<ArrayList<Contents>> observable = Observable.create(
           new Observable.OnSubscribe<ArrayList<Contents>>() {
             @Override
@@ -149,8 +214,9 @@ public class MainActivityPresenter
       observable.subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
-
       addSubscriber(subscriber);
+      */
+
       isLoading = true;
       if (view != null) {
         view.startLoadMore();
