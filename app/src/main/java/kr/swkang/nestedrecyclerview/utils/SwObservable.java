@@ -10,7 +10,7 @@ import rx.Subscriber;
  * @author KangSung-Woo
  * @since 2016/08/02
  */
-public class SwObservable<T> {
+public class SwObservable {
   private BasePresenter presenter;
   private Observable    observable;
 
@@ -19,7 +19,8 @@ public class SwObservable<T> {
     this.observable = o;
   }
 
-  public final void subscribe(@NonNull Subscriber<? super T> subscriber) {
+  @SuppressWarnings("unchecked")
+  public final void subscribe(@NonNull Subscriber subscriber) {
     if (presenter == null) {
       throw new NullPointerException("BasePresenter object is null.");
     }

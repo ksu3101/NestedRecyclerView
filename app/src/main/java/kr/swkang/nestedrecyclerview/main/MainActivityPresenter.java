@@ -92,34 +92,6 @@ public class MainActivityPresenter
 
   public void retrieveMainListDatas(final boolean isLoadMore) {
     if (!isLoading) {
-      /*
-      final Subscriber<ArrayList<Contents>> subscriber = new Subscriber<ArrayList<Contents>>() {
-        @Override
-        public void onCompleted() {
-          isLoading = false;
-          if (view != null && isLoadMore) {
-            view.loadMoreCompleted();
-          }
-        }
-
-        @Override
-        public void onError(Throwable e) {
-          isLoading = false;
-          if (view != null) {
-            view.onError(TAG, e != null ? e.getMessage() : "ERROR");
-            if (isLoadMore) view.loadMoreCompleted();
-          }
-        }
-
-        @Override
-        public void onNext(ArrayList<Contents> resultList) {
-          onCompleted();
-          if (view != null) {
-            view.onRetriveMainListItems(resultList, isLoadMore);
-          }
-        }
-      }; */
-
       SwObservable observable = new SwObservable(
           this,
           Observable.create(
@@ -180,43 +152,6 @@ public class MainActivityPresenter
             }
           }
       );
-
-      /*
-      Observable<ArrayList<Contents>> observable = Observable.create(
-          new Observable.OnSubscribe<ArrayList<Contents>>() {
-            @Override
-            public void call(Subscriber<? super ArrayList<Contents>> subscriber) {
-              ArrayList<Contents> result = new ArrayList<>();
-
-              if (isLoadMore) {
-                // add dummy body datas
-                for (int i = 1; i <= 10; i++) {
-                  result.add(getRandomBodyItems(i, new Random()));
-                }
-                // some running operations
-                try {
-                  Thread.sleep(TimeUnit.SECONDS.toMillis(2));
-
-                } catch (InterruptedException ie) {
-                  subscriber.onError(ie);
-                } finally {
-                  subscriber.onNext(result);
-                }
-              }
-              else {
-                // refresh list items [ DUMMY DATAS ]
-                result = retrieveDummyDatas();
-                subscriber.onNext(result);
-              }
-            }
-          }
-      );
-      observable.subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
-      addSubscriber(subscriber);
-      */
-
       isLoading = true;
       if (view != null) {
         view.startLoadMore();
