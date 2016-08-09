@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import java.util.List;
 import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.main.list.MainRvAdapter;
 import kr.swkang.nestedrecyclerview.main.list.MainRvItemDecoration;
+import kr.swkang.nestedrecyclerview.main.list.SectionRvAdapter;
 import kr.swkang.nestedrecyclerview.main.list.model.Contents;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodyItems;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodySection;
@@ -185,20 +187,43 @@ public class MainActivity
   @Override
   public void onClicked(@NonNull SwRecyclerViewAdapter.ViewHolder viewHolder, int position) {
     Log.d(TAG, "// Touched Item [" + position + "]");
-    if (adapter != null) {
-      Contents c = adapter.getItem(position);
-      if (c != null) {
-        if (c instanceof BodyItems) {
-          BodyItems bodyItems = (BodyItems) c;
-          startActivity_DetailContents(
-              viewHolder.getView(R.id.main_item_h_section_bg_iv), bodyItems.getThumbnailImgUrl(),
-              viewHolder.getView(R.id.main_item_h_section_tv_title), bodyItems.getTitle(),
-              viewHolder.getView(R.id.main_item_h_section_tv_desc), bodyItems.getDesc()
-          );
+    if (viewHolder.getTag() != null) {
+      Object viewHolderTag = viewHolder.getTag();
+      if (viewHolderTag instanceof String) {
+        String tagStr = (String) viewHolderTag;
+        if (tagStr.equals(MainRvAdapter.TAG)) {
+          if (adapter != null) {
+            Contents c = adapter.getItem(position);
+            if (c != null) {
+              if (c instanceof BodyItems) {
+                BodyItems bodyItems = (BodyItems) c;
+                startActivity_DetailContents(
+                    viewHolder.getView(R.id.main_item_h_section_bg_iv), bodyItems.getThumbnailImgUrl(),
+                    viewHolder.getView(R.id.main_item_h_section_tv_title), bodyItems.getTitle(),
+                    viewHolder.getView(R.id.main_item_h_section_tv_desc), bodyItems.getDesc()
+                );
+              }
+            }
+          }
+        }
+        else if (tagStr.equals(SectionRvAdapter.TAG)) {
+          ImageView ivBg = (ImageView) viewHolder.getView(R.id.main_item_f_section_bg_iv);
+          if (ivBg != null) {
+            Object tagObj = ivBg.getTag();
+
+            if (tagObj != null && tagObj instanceof BodyItems) {
+              BodyItems bodyItems = (BodyItems) tagObj;
+              startActivity_DetailContents(
+                  ivBg, bodyItems.getThumbnailImgUrl(),
+                  viewHolder.getView(R.id.main_item_f_section_bg_tv), bodyItems.getTitle(),
+                  null, null
+              );
+            }
+
+          }
         }
       }
     }
-
   }
 
 }

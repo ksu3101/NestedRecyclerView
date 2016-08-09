@@ -15,6 +15,7 @@ import java.util.List;
 
 import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodyItems;
+import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
 import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerViewAdapter;
 
 /**
@@ -25,9 +26,10 @@ import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerViewAdapter;
  */
 public class SectionRvAdapter
     extends SwRecyclerViewAdapter<BodyItems> {
+  public static final String TAG = SectionRvAdapter.class.getSimpleName();
 
-  public SectionRvAdapter(@NonNull Context context, @NonNull List<BodyItems> list) {
-    super(context, list);
+  public SectionRvAdapter(@NonNull Context context, @NonNull List<BodyItems> list, @NonNull OnViewClickListener clickListener) {
+    super(context, list, TAG, clickListener);
   }
 
   @Override
@@ -47,6 +49,7 @@ public class SectionRvAdapter
                .centerCrop()
                .into(ivBg);
       }
+      ivBg.setTag(item);
 
       TextView tvTitle = (TextView) viewHolder.getView(R.id.main_item_f_section_bg_tv);
       tvTitle.setText(item.getTitle() != null ? item.getTitle() : "");

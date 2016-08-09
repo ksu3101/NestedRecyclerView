@@ -1,9 +1,7 @@
 package kr.swkang.nestedrecyclerview.utils;
 
 import android.support.annotation.NonNull;
-import android.view.View;
 
-import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerView;
 import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerViewAdapter;
 
 /**

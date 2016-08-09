@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -64,20 +65,29 @@ public abstract class BaseActivity
   public final void startActivity_DetailContents(
       @NonNull View sharedTransitionImageView, String imgUrl,
       @NonNull View sharedTransitionTitleTextView, String title,
-      @NonNull View sharedTransitionCategoryTextView, String category) {
+      View sharedTransitionCategoryTextView, String category) {
     Intent intent = new Intent(this, DetailActivity.class);
     intent.putExtra(DetailActivity.BUNDLE_KEY_CONTENTS_THUMBNAIL, imgUrl);
     intent.putExtra(DetailActivity.BUNDLE_KEY_CONTENTS_TITLE, title);
     intent.putExtra(DetailActivity.BUNDLE_KEY_CONTENTS_CATEGORY, category);
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      ActivityOptionsCompat options =
-          ActivityOptionsCompat.makeSceneTransitionAnimation(
-              this,
-              new Pair<View, String>(sharedTransitionImageView, getString(R.string.transition_name_thumbnail)),
-              new Pair<View, String>(sharedTransitionTitleTextView, getString(R.string.transition_name_title)),
-              new Pair<View, String>(sharedTransitionCategoryTextView, getString(R.string.transition_name_category))
-          );
+      ActivityOptionsCompat options;
+      if (sharedTransitionCategoryTextView != null && TextUtils.isEmpty(category)) {
+        options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this,
+            new Pair<View, String>(sharedTransitionImageView, getString(R.string.transition_name_thumbnail)),
+            new Pair<View, String>(sharedTransitionTitleTextView, getString(R.string.transition_name_title)),
+            new Pair<View, String>(sharedTransitionCategoryTextView, getString(R.string.transition_name_category))
+        );
+      }
+      else {
+        options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this,
+            new Pair<View, String>(sharedTransitionImageView, getString(R.string.transition_name_thumbnail)),
+            new Pair<View, String>(sharedTransitionTitleTextView, getString(R.string.transition_name_title))
+        );
+      }
       ActivityCompat.startActivity(this, intent, options.toBundle());
     }
     else {
