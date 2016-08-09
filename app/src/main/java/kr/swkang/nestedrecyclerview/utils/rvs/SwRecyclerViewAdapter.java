@@ -23,17 +23,23 @@ public abstract class SwRecyclerViewAdapter<T>
     extends RecyclerView.Adapter<SwRecyclerViewAdapter.ViewHolder> {
   protected List<T>             list;
   protected Context             context;
-  private   OnViewClickListener clickListener;
+  protected OnViewClickListener clickListener;
+  private   Object              tagObj;
 
   public SwRecyclerViewAdapter(@NonNull Context context, @NonNull List<T> list) {
     this(context, list, null);
   }
 
   public SwRecyclerViewAdapter(@NonNull Context context, @NonNull List<T> list, OnViewClickListener clickListener) {
+    this(context, list, null, clickListener);
+  }
+
+  public SwRecyclerViewAdapter(@NonNull Context context, @NonNull List<T> list, Object tag, OnViewClickListener clickListener) {
     super();
     this.context = context;
     this.clickListener = clickListener;
     this.list = new ArrayList<>();
+    setTag(tag);
     setItem(list, false);
   }
 
@@ -46,6 +52,14 @@ public abstract class SwRecyclerViewAdapter<T>
    * createView()에서 생성한 View와 position의 Data를 기반으로 뷰를 업데이트 한다.
    */
   protected abstract void bindView(int viewType, T item, ViewHolder viewHolder);
+
+  public Object getTag() {
+    return tagObj;
+  }
+
+  public void setTag(Object tagObj) {
+    this.tagObj = tagObj;
+  }
 
   public void clearItems() {
     if (list != null && !list.isEmpty()) {
@@ -113,7 +127,7 @@ public abstract class SwRecyclerViewAdapter<T>
 
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    return new ViewHolder(createView(context, parent, viewType), clickListener);
+    return new ViewHolder(createView(context, parent, viewType), tagObj, clickListener);
   }
 
   @Override
@@ -140,16 +154,22 @@ public abstract class SwRecyclerViewAdapter<T>
       implements View.OnClickListener {
     private Map<Integer, View>  views;
     private OnViewClickListener clickListener;
+    private Object              tag;
 
-    public ViewHolder(View view, OnViewClickListener clickListener) {
+    public ViewHolder(View view, Object tag, OnViewClickListener clickListener) {
       super(view);
       this.clickListener = clickListener;
+      this.tag = tag;
       if (this.clickListener != null) {
         view.setOnClickListener(this);
       }
       views = new HashMap<>();
       // insert RootView
       views.put(0, view);
+    }
+
+    public Object getTag() {
+      return tag;
     }
 
     public View findViewById(@IdRes int id) {

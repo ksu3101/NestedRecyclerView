@@ -17,12 +17,16 @@
          android:layout_height="match_parent">
 
          <!-- backgorund image -->
-         <ImageView
+         <kr.swkang.swimageview.SwImageView
             android:id="@+id/main_item_f_section_bg_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/flat_clouds"
-            android:transitionName="@string/transition_name_thumbnail"/>
+            android:clickable="true"
+            android:transitionName="@string/transition_name_thumbnail"
+            app:siv_click_color="#30000000"
+            app:siv_click_enter_duration="150"
+            app:siv_click_exit_duration="100"/>
 
          <!-- gradient view -->
          <kr.swkang.swimageview.SwImageView

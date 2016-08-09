@@ -37,13 +37,17 @@ import kr.swkang.nestedrecyclerview.utils.viewpagers.pagerindicator.ViewPagerInd
  */
 public class MainRvAdapter
     extends SwRecyclerViewAdapter<Contents> {
-  public static final int FOOTER_LOADMORE = 99;
+  public static final String TAG             = MainRvAdapter.class.getSimpleName();
+  public static final int    FOOTER_LOADMORE = 99;
 
   private FragmentManager        fm;
   private SubHorRvItemDecoration subHorRvItemDecoration;
 
-  public MainRvAdapter(@NonNull Context context, @NonNull FragmentManager fm, @NonNull ArrayList<Contents> list, OnViewClickListener clickListener) {
-    super(context, list, clickListener);
+  public MainRvAdapter(@NonNull Context context,
+                       @NonNull FragmentManager fm,
+                       @NonNull ArrayList<Contents> list,
+                       OnViewClickListener clickListener) {
+    super(context, list, TAG, clickListener);
     this.fm = fm;
     this.subHorRvItemDecoration = new SubHorRvItemDecoration(context);
   }
@@ -101,7 +105,7 @@ public class MainRvAdapter
         rv.removeItemDecoration(subHorRvItemDecoration);
         rv.addItemDecoration(subHorRvItemDecoration);
 
-        SectionRvAdapter adapter = new SectionRvAdapter(context, bodyItem.getBodyItemses());
+        SectionRvAdapter adapter = new SectionRvAdapter(context, bodyItem.getBodyItemses(), clickListener);
         rv.setAdapter(adapter);
       }
       else {
