@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:background="@color/transparent"
@@ -9,8 +9,8 @@
    <android.support.v7.widget.CardView
       android:layout_width="@dimen/section_full_cardview_width"
       android:layout_height="@dimen/section_full_cardview_height"
-      card_view:cardCornerRadius="@dimen/cardview_def_corner_radius"
-      card_view:cardElevation="@dimen/cardview_def_elevation">
+      app:cardCornerRadius="@dimen/cardview_def_corner_radius"
+      app:cardElevation="@dimen/cardview_def_elevation">
 
       <RelativeLayout
          android:layout_width="match_parent"
@@ -24,11 +24,14 @@
             android:background="@color/flat_clouds"/>
 
          <!-- gradient view -->
-         <View
+         <kr.swkang.swimageview.SwImageView
             android:layout_width="match_parent"
             android:layout_height="85dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/gradient_black_to_transparent"/>
+            android:background="@drawable/gradient_black_to_transparent"
+            app:siv_corner_radius="@dimen/cardview_def_corner_radius"
+            app:siv_corner_type="all"
+            app:siv_shapetype="rectangle"/>
 
          <!-- title text -->
          <TextView

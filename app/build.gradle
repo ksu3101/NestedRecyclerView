@@ -31,5 +31,5 @@ dependencies {
     compile 'com.android.support:cardview-v7:24.0.0'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-
+    compile 'kr.swkang.swimageview:swimageview:1.0.2'
 }
