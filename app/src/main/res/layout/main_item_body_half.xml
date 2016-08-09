@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/tools"
               xmlns:card_view="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="@dimen/half_cardview_height"
@@ -23,11 +24,14 @@
             android:background="@color/flat_clouds"/>
 
          <!-- gradient view -->
-         <View
+         <kr.swkang.swimageview.SwImageView
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/gradient_black_to_transparent"/>
+            android:background="@drawable/gradient_black_to_transparent"
+            app:siv_corner_radius="@dimen/cardview_def_corner_radius"
+            app:siv_corner_type="all"
+            app:siv_shapetype="rectangle"/>
 
          <!-- title String -->
          <TextView
