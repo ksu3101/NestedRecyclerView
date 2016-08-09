@@ -21,7 +21,9 @@
             android:id="@+id/main_item_h_section_bg_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/flat_clouds"/>
+            android:background="@color/flat_clouds"
+            android:clickable="true"
+            android:transitionName="@string/transition_name_thumbnail"/>
 
          <!-- gradient view -->
          <kr.swkang.swimageview.SwImageView
@@ -46,7 +48,8 @@
             android:paddingRight="12dp"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:transitionName="@string/transition_name_title"/>
 
          <!-- description -->
          <TextView
@@ -58,7 +61,8 @@
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:textColor="@color/white"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:transitionName="@string/transition_name_category"/>
 
       </RelativeLayout>
 

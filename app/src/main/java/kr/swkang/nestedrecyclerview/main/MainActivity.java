@@ -19,6 +19,7 @@ import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.main.list.MainRvAdapter;
 import kr.swkang.nestedrecyclerview.main.list.MainRvItemDecoration;
 import kr.swkang.nestedrecyclerview.main.list.model.Contents;
+import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodyItems;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContents;
 import kr.swkang.nestedrecyclerview.utils.BaseActivity;
@@ -26,6 +27,7 @@ import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
 import kr.swkang.nestedrecyclerview.utils.rvs.SwOnScrollListener;
 import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerView;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
+import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerViewAdapter;
 
 public class MainActivity
     extends BaseActivity
@@ -181,8 +183,22 @@ public class MainActivity
   }
 
   @Override
-  public void onClick(@NonNull View v, int position) {
-    Toast.makeText(MainActivity.this, "Touched Item [" + position + "]", Toast.LENGTH_SHORT).show();
+  public void onClicked(@NonNull SwRecyclerViewAdapter.ViewHolder viewHolder, int position) {
+    Log.d(TAG, "// Touched Item [" + position + "]");
+    if (adapter != null) {
+      Contents c = adapter.getItem(position);
+      if (c != null) {
+        if (c instanceof BodyItems) {
+          BodyItems bodyItems = (BodyItems) c;
+          startActivity_DetailContents(
+              viewHolder.getView(R.id.main_item_h_section_bg_iv), bodyItems.getThumbnailImgUrl(),
+              viewHolder.getView(R.id.main_item_h_section_tv_title), bodyItems.getTitle(),
+              viewHolder.getView(R.id.main_item_h_section_tv_desc), bodyItems.getDesc()
+          );
+        }
+      }
+    }
+
   }
 
 }
