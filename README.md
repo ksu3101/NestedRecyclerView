@@ -9,6 +9,9 @@ Nested RecyclerView example project.
  - Half width Body : Span 1의 half width를 사용 하는 1 Body row/column. 
  - Footer : 없어도 상관 없으며 ViewType에 대응 하는 데이터 타입을 구성 해야 한다. 
  - LoadMore  : `getItem(int position)`했을 경우 결과가 `-1`이라면 load more footer를 설정 하고 보여 준다. 
+- RecyclerView의 Item을 터치 했을 경우 상세 화면으로 이동 하는데 이 때 `ActivityOptionsCompat`을 활용 한 `Material Design`의 동일한 Transition name이 태깅된 뷰들의 Transition Animation effect를 지원 한다. 
+ - [startActivity_DetailContents() methods](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/BaseActivity.java#L64)
+ - 참고 
 
 ### 2. Used modules
 1. [Generic data type re-usable RecyclerView Adapter](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/SwRecyclerViewAdapter.java)  
@@ -23,6 +26,7 @@ Nested RecyclerView example project.
 - [x] enable `Load More`pattern. [link](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/main/MainActivity.java#L100), [Adapter methods](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/main/list/MainRvAdapter.java#L172)
 - [x] apply `Empty View`. 
 - [x] enable `Snappy` Horizontal RecyclerView scroll(fling). [참고](http://stackoverflow.com/questions/26370289/snappy-scrolling-in-recyclerview)
+- [x] apply `Material Design Shared view Transition effect`. 
 
 ### 4. guide
  1. MVP / [Parent classes](https://github.com/ksu3101/NestedRecyclerView/tree/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/mvp)
@@ -35,6 +39,7 @@ Nested RecyclerView example project.
  8. ViewPager / [classes](https://github.com/ksu3101/NestedRecyclerView/tree/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/viewpagers) / [Indicator](https://github.com/ksu3101/NestedRecyclerView/tree/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/viewpagers/pagerindicator) / [Implement Header of Main RecyclerView](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/main/list/MainRvAdapter.java#L83)
  9. Sub Horizontal [RecyclerView Implement](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/main/list/MainRvAdapter.java#L100) / [Adapter](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/main/list/SectionRvAdapter.java) / [Item decoration](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/main/list/SubHorRvItemDecoration.java)
  10. Resume or Pause asyncronous image load by RecyclerView [scroll state](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/rvs/SwOnScrollListener.java) / [Implements](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/main/MainActivity.java#L109)
+ 11. [DetailActivity](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/detail/DetailActivity.java)
 
 
 ![guide image](https://github.com/ksu3101/TIL/blob/master/Android/images/nested_rv_guide.png)
