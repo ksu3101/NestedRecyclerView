@@ -21,7 +21,8 @@
             android:id="@+id/main_item_f_section_bg_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/flat_clouds"/>
+            android:background="@color/flat_clouds"
+            android:transitionName="@string/transition_name_thumbnail"/>
 
          <!-- gradient view -->
          <kr.swkang.swimageview.SwImageView

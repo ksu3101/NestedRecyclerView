@@ -1,3 +1,9 @@
 <resources>
    <string name="app_name">NestedRecyclerView</string>
+
+   <!-- Activity transition shared view name -->
+   <string name="transition_name_thumbnail">app_thumbnail</string>
+   <string name="transition_name_title">app_title</string>
+   <string name="transition_name_category">app_category</string>
+
 </resources>
