@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/gradient_black_to_transparent"
+            android:background="@drawable/gradient_black_to_transparent_corner"
             app:siv_corner_radius="@dimen/cardview_def_corner_radius"
             app:siv_corner_type="all"
             app:siv_shapetype="rectangle"/>

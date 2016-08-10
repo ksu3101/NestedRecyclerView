@@ -61,6 +61,24 @@ public abstract class BaseActivity
 
   // - - Common methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  public final void startActivity_DetailContents(
+      @NonNull View sharedTransitionImageView, String imgUrl, String title, String category) {
+    Intent intent = new Intent(this, DetailActivity.class);
+    intent.putExtra(DetailActivity.BUNDLE_KEY_CONTENTS_THUMBNAIL, imgUrl);
+    intent.putExtra(DetailActivity.BUNDLE_KEY_CONTENTS_TITLE, title);
+    intent.putExtra(DetailActivity.BUNDLE_KEY_CONTENTS_CATEGORY, category);
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      ActivityOptionsCompat options =
+          ActivityOptionsCompat.makeSceneTransitionAnimation(this, sharedTransitionImageView, getString(R.string.transition_name_thumbnail));
+      ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+    else {
+      startActivity(intent);
+    }
+  }
+
+  @Deprecated
   @SuppressWarnings("unchecked")
   public final void startActivity_DetailContents(
       @NonNull View sharedTransitionImageView, String imgUrl,

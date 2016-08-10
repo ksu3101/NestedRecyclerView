@@ -199,9 +199,16 @@ public class MainActivity
                 BodyItems bodyItems = (BodyItems) c;
                 startActivity_DetailContents(
                     viewHolder.getView(R.id.main_item_h_section_bg_iv), bodyItems.getThumbnailImgUrl(),
+                    bodyItems.getTitle(),
+                    bodyItems.getDesc()
+                );
+                /*
+                startActivity_DetailContents(
+                    viewHolder.getView(R.id.main_item_h_section_bg_iv), bodyItems.getThumbnailImgUrl(),
                     viewHolder.getView(R.id.main_item_h_section_tv_title), bodyItems.getTitle(),
                     viewHolder.getView(R.id.main_item_h_section_tv_desc), bodyItems.getDesc()
                 );
+                */
               }
             }
           }
@@ -215,9 +222,16 @@ public class MainActivity
               BodyItems bodyItems = (BodyItems) tagObj;
               startActivity_DetailContents(
                   ivBg, bodyItems.getThumbnailImgUrl(),
+                  bodyItems.getTitle(),
+                  bodyItems.getDesc() != null ? bodyItems.getDesc() : ""
+              );
+              /*
+              startActivity_DetailContents(
+                  ivBg, bodyItems.getThumbnailImgUrl(),
                   viewHolder.getView(R.id.main_item_f_section_bg_tv), bodyItems.getTitle(),
                   null, null
               );
+              */
             }
 
           }
