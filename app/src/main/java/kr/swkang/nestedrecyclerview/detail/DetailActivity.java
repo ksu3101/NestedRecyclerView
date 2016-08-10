@@ -1,8 +1,13 @@
 package kr.swkang.nestedrecyclerview.detail;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Transition;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.utils.BaseActivity;
+import kr.swkang.nestedrecyclerview.utils.TransitionListenerAdapter;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 
 /**
@@ -44,19 +50,31 @@ public class DetailActivity
     final String title = intent.getStringExtra(BUNDLE_KEY_CONTENTS_TITLE);
     final String category = intent.getStringExtra(BUNDLE_KEY_CONTENTS_CATEGORY);
 
-    TextView tvTitle = (TextView) findViewById(R.id.detail_tv_title);
+    final TextView tvTitle = (TextView) findViewById(R.id.detail_tv_title);
     tvTitle.setText(title != null ? title : "");
 
-    TextView tvCategory = (TextView) findViewById(R.id.detail_tv_category);
+    final TextView tvCategory = (TextView) findViewById(R.id.detail_tv_category);
     tvCategory.setText(category != null ? category : "");
 
-    ImageView iv = (ImageView) findViewById(R.id.detail_iv);
+    final ImageView iv = (ImageView) findViewById(R.id.detail_iv);
     if (imgThumbnail != null) {
       Picasso.with(this)
              .load(imgThumbnail)
              .fit()
              .centerCrop()
              .into(iv);
+    }
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      Transition sharedElementTransition = getWindow().getSharedElementEnterTransition();
+      sharedElementTransition.addListener(
+          new TransitionListenerAdapter() {
+            @Override
+            public void onTransitionEnd(Transition transition) {
+              // something to do..
+            }
+          }
+      );
     }
 
   }
