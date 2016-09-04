@@ -12,11 +12,13 @@ Nested RecyclerView example project.
 - RecyclerView의 Item을 터치 했을 경우 상세 화면으로 이동 하는데 이 때 `ActivityOptionsCompat`을 활용 한 `Material Design`의 동일한 Transition name이 태깅된 뷰들의 shared elements Transition effect를 지원 한다. 
  - [startActivity_DetailContents() methods](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/BaseActivity.java#L64)
  - [.../values-21/styles.xml 참고](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/res/values-v21/styles.xml)
+---
 
 ### 2. Used modules
 1. [Generic data type re-usable RecyclerView Adapter](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/SwRecyclerViewAdapter.java)  
 2. [Infinite loop ViewPager](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/viewpagers/InfiniteViewPager.java), [ViewPager Indicator](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/viewpagers/pagerindicator/ViewPagerIndicator.java) 
 3. MVP pattern, RecyclerView-CardView, RxAndroid, Picasso  
+---
 
 ### 3. Todo   
 - [x] Header에 sliding ViewPager, ViewPager indicator 적용.  
@@ -27,12 +29,14 @@ Nested RecyclerView example project.
 - [x] apply `Empty View`. 
 - [x] enable `Snappy` Horizontal RecyclerView scroll(fling). [참고](http://stackoverflow.com/questions/26370289/snappy-scrolling-in-recyclerview)
 - [x] apply `Material Design Shared view Transition effect`. 
+---
 
 ### 4. Screenshot images
 ![image 01](https://github.com/ksu3101/TIL/blob/master/Android/images/nestedrv_img01.png)
 ![image 02](https://github.com/ksu3101/TIL/blob/master/Android/images/nestedrv_img02.png)
 ![image 03](https://github.com/ksu3101/TIL/blob/master/Android/images/nestedrv_img03.png)
 ![image 04](https://github.com/ksu3101/TIL/blob/master/Android/images/nestedrv_img04.png)
+---
 
 ### 5. guide
  1. MVP / [Parent classes](https://github.com/ksu3101/NestedRecyclerView/tree/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/mvp)
