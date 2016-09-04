@@ -28,7 +28,13 @@ Nested RecyclerView example project.
 - [x] enable `Snappy` Horizontal RecyclerView scroll(fling). [참고](http://stackoverflow.com/questions/26370289/snappy-scrolling-in-recyclerview)
 - [x] apply `Material Design Shared view Transition effect`. 
 
-### 4. guide
+### 4. Screenshot images
+![image 01](https://github.com/ksu3101/TIL/blob/master/Android/images/nestedrv_img01.png)
+![image 02](https://github.com/ksu3101/TIL/blob/master/Android/images/nestedrv_img02.png)
+![image 03](https://github.com/ksu3101/TIL/blob/master/Android/images/nestedrv_img03.png)
+![image 04](https://github.com/ksu3101/TIL/blob/master/Android/images/nestedrv_img04.png)
+
+### 5. guide
  1. MVP / [Parent classes](https://github.com/ksu3101/NestedRecyclerView/tree/master/app/src/main/java/kr/swkang/nestedrecyclerview/utils/mvp)
  2. MVP / VIEW / [MainActivity](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/main/MainActivity.java) 
  3. MVP / Presenter / [MainActivityPresenter](https://github.com/ksu3101/NestedRecyclerView/blob/master/app/src/main/java/kr/swkang/nestedrecyclerview/main/MainActivityPresenter.java)
