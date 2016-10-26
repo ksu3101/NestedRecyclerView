@@ -13,14 +13,14 @@ import java.io.File;
  * @since 2016-10-26
  */
 
-public class BitmapMemLRUCache
+public class BitmapMemLruCache
   implements BitmapCache {
-  private static final String TAG = BitmapMemLRUCache.class.getSimpleName();
+  private static final String TAG = BitmapMemLruCache.class.getSimpleName();
 
   private LruCache<String, Bitmap> lruCache;
 
-  public BitmapMemLRUCache(int mapSize) {
-    this.lruCache = new LruCache<>(mapSize);
+  public BitmapMemLruCache(int cacheMaxSize) {
+    this.lruCache = new LruCache<>(cacheMaxSize);
   }
 
   @Override

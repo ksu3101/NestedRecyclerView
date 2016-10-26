@@ -40,7 +40,7 @@ public class AsyncImageLoader {
 
   private AsyncTask<Void, Void, Bitmap> imgLoader;
   private Callback                      callback;
-  private BitmapCacheLoader             cache;
+  private boolean                       isNotFoundedInCache;
 
   private boolean                             isFitImageView;
   private boolean                             isEnableResize;
@@ -54,6 +54,8 @@ public class AsyncImageLoader {
   private com.squareup.picasso.Transformation transformation;
   private ColorDrawable                       beforeTransitionDrawable;
   private boolean                             isPrintLog;
+  private boolean                             setStoreMemCache;
+  private boolean                             setStoreDiskCache;
 
   private AsyncImageLoader(Builder builder) {
     this.callback = builder.callback;
@@ -69,6 +71,8 @@ public class AsyncImageLoader {
     this.isFitImageView = builder.isFitImageView;
     this.isPrintLog = builder.isPrintLog;
     this.beforeTransitionDrawable = builder.beforeTransitionDrawable;
+    this.setStoreMemCache = builder.setStoreMemCache;
+    this.setStoreDiskCache = builder.setStoreDiskCache;
 
     getBitmapImage(builder.imgUrl, builder.imageView);
   }
@@ -102,25 +106,31 @@ public class AsyncImageLoader {
           BufferedInputStream bis = null;
           try {
 
-            // 1. 메모리 비트맵 캐시 확인
+            // 캐시에서 이미지를 가져 온다.
+            result = BitmapCacheLoader.getInstance().getSavedImage(imageUrl);
 
+            // 캐시에 이미지가 없을 경우 네트워크를 통해서 가져 온다.
+            if (result == null) {
+              URL url = new URL(imageUrl);
+              URLConnection con = url.openConnection();
+              con.connect();
 
-            // 2. 디스크 비트맵 캐시 확인
+              // get file size
+              //final int lengthOfFile = con.getContentLength();
 
-            URL url = new URL(imageUrl);
-            URLConnection con = url.openConnection();
-            con.connect();
+              bis = new BufferedInputStream(con.getInputStream());
 
-            // get file size
-            final int lengthOfFile = con.getContentLength();
+              result = BitmapFactory.decodeStream(bis);
+              bis.close();
 
-            bis = new BufferedInputStream(con.getInputStream());
-
-            result = BitmapFactory.decodeStream(bis);
-            bis.close();
+              isNotFoundedInCache = false;
+            }
+            else {
+              isNotFoundedInCache = true;
+            }
 
             if (isPrintLog) {
-              Log.d(TAG, "// LOG // lengthOfFile = " + lengthOfFile + ", width = " + width + ", height = " + height + ", loaded Bitmap image width = " +
+              Log.d(TAG, "// LOG // width = " + width + ", height = " + height + ", loaded Bitmap image width = " +
                 (result != null ? result.getWidth() : "NaN") + ", image height = " + (result != null ? result.getHeight() : "Nan")
               );
             }
@@ -169,6 +179,12 @@ public class AsyncImageLoader {
         @Override
         protected void onPostExecute(Bitmap resultImg) {
           if (imageView != null && resultImg != null) {
+
+            // 이미지를 성공적으로 가져왔고 캐시에 존재하지 않았다면, 저장 한다.
+            if (isNotFoundedInCache) {
+              BitmapCacheLoader.getInstance().storeImage(imageUrl, resultImg, setStoreMemCache, setStoreDiskCache);
+            }
+
             if (isEnableFade) {
               // start Fade animations
               imageView.clearAnimation();
@@ -269,9 +285,10 @@ public class AsyncImageLoader {
     private com.squareup.picasso.Transformation transformation;
     private boolean                             isPrintLog;
     private ColorDrawable                       beforeTransitionDrawable;
+    private boolean                             setStoreMemCache;
+    private boolean                             setStoreDiskCache;
 
     public Builder(@NonNull Context context) {
-
       this.imgUrl = "";
       this.isResizeEnable = false;
       this.scaleType = ImageView.ScaleType.FIT_START;
@@ -286,6 +303,8 @@ public class AsyncImageLoader {
       this.isFitImageView = false;
       this.isPrintLog = false;
       this.beforeTransitionDrawable = new ColorDrawable(DEFAULT_COLOR);
+      this.setStoreMemCache = true;
+      this.setStoreDiskCache = false;
     }
 
     /**
@@ -451,6 +470,24 @@ public class AsyncImageLoader {
      */
     public Builder printLog() {
       this.isPrintLog = true;
+      return this;
+    }
+
+    /**
+     * 비트맵 이미지를 로드 한 뒤 메모리 캐시에 저장 여부를 설정 한다.
+     * (Default True)
+     */
+    public Builder setStoreMemCache(boolean storeMemCache) {
+      this.setStoreMemCache = storeMemCache;
+      return this;
+    }
+
+    /**
+     * 비트맵 이미지를 로드 한 뒤 디스크 캐시에 저장 여부를 설정 한다.
+     * (Default False)
+     */
+    public Builder setStoreDiskCache(boolean storeDiskCache) {
+      this.setStoreDiskCache = storeDiskCache;
       return this;
     }
 
