@@ -1,4 +1,4 @@
-package kr.swkang.nestedrecyclerview.utils.viewpagers;
+package kr.swkang.nestedrecyclerview.utils.widgets.viewpagers;
 
 
 import android.content.Context;

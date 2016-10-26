@@ -1,4 +1,4 @@
-package kr.swkang.nestedrecyclerview.utils;
+package kr.swkang.nestedrecyclerview.utils.widgets;
 
 import android.annotation.TargetApi;
 import android.os.Build;

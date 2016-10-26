@@ -1,4 +1,4 @@
-package kr.swkang.nestedrecyclerview.utils.viewpagers.pagerindicator;
+package kr.swkang.nestedrecyclerview.utils.widgets.viewpagers.pagerindicator;
 
 import android.content.Context;
 import android.os.Bundle;

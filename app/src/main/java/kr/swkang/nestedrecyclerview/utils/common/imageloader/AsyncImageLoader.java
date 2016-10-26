@@ -27,7 +27,7 @@ import java.net.URLConnection;
 import kr.swkang.nestedrecyclerview.utils.AnimationUtils;
 import kr.swkang.nestedrecyclerview.utils.BitmapUtils;
 import kr.swkang.nestedrecyclerview.utils.FileUtils;
-import kr.swkang.nestedrecyclerview.utils.common.imageloader.cache.BitmapMemLRUCache;
+import kr.swkang.nestedrecyclerview.utils.common.imageloader.cache.BitmapCacheLoader;
 
 /**
  * @author KangSung-Woo
@@ -40,7 +40,7 @@ public class AsyncImageLoader {
 
   private AsyncTask<Void, Void, Bitmap> imgLoader;
   private Callback                      callback;
-  private BitmapMemLRUCache             lruCache;
+  private BitmapCacheLoader             cache;
 
   private boolean                             isFitImageView;
   private boolean                             isEnableResize;

@@ -1,4 +1,4 @@
-package kr.swkang.nestedrecyclerview.utils.rvs.snappy;
+package kr.swkang.nestedrecyclerview.utils.widgets.rvs.snappy;
 
 /**
  * 참고 : http://stackoverflow.com/questions/26370289/snappy-scrolling-in-recyclerview

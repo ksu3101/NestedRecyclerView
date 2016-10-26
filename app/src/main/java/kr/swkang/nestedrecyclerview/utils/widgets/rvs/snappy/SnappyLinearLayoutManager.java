@@ -1,4 +1,4 @@
-package kr.swkang.nestedrecyclerview.utils.rvs.snappy;
+package kr.swkang.nestedrecyclerview.utils.widgets.rvs.snappy;
 
 import android.content.Context;
 import android.graphics.PointF;

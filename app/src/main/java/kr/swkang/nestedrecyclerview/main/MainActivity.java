@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -24,12 +23,12 @@ import kr.swkang.nestedrecyclerview.main.list.model.Contents;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodyItems;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContents;
-import kr.swkang.nestedrecyclerview.utils.BaseActivity;
-import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
-import kr.swkang.nestedrecyclerview.utils.rvs.SwOnScrollListener;
-import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerView;
+import kr.swkang.nestedrecyclerview.utils.common.BaseActivity;
+import kr.swkang.nestedrecyclerview.utils.widgets.OnViewClickListener;
+import kr.swkang.nestedrecyclerview.utils.widgets.rvs.SwOnScrollListener;
+import kr.swkang.nestedrecyclerview.utils.widgets.rvs.SwRecyclerView;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
-import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerViewAdapter;
+import kr.swkang.nestedrecyclerview.utils.widgets.rvs.SwRecyclerViewAdapter;
 
 public class MainActivity
     extends BaseActivity

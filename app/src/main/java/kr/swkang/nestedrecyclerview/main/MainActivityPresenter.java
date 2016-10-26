@@ -13,7 +13,7 @@ import kr.swkang.nestedrecyclerview.main.list.model.SectionHeader;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodyItems;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContents;
-import kr.swkang.nestedrecyclerview.utils.SwObservable;
+import kr.swkang.nestedrecyclerview.utils.widgets.SwObservable;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 import kr.swkang.nestedrecyclerview.utils.mvp.BaseView;
 import rx.Observable;

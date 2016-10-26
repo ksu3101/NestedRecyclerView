@@ -5,13 +5,13 @@
                 android:background="@color/black"
                 android:orientation="vertical">
 
-   <kr.swkang.nestedrecyclerview.utils.viewpagers.InfiniteViewPager
+   <kr.swkang.nestedrecyclerview.utils.widgets.viewpagers.InfiniteViewPager
       android:id="@+id/main_item_header_viewpager"
       android:layout_width="match_parent"
       android:layout_height="match_parent"/>
 
    <!-- view pager indicator -->
-   <kr.swkang.nestedrecyclerview.utils.viewpagers.pagerindicator.ViewPagerIndicator
+   <kr.swkang.nestedrecyclerview.utils.widgets.viewpagers.pagerindicator.ViewPagerIndicator
       android:id="@+id/main_item_header_vp_indicator"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"

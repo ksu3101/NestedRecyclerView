@@ -1,4 +1,4 @@
-package kr.swkang.nestedrecyclerview.utils.rvs;
+package kr.swkang.nestedrecyclerview.utils.widgets.rvs;
 
 import android.content.Context;
 import android.support.annotation.IdRes;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
+import kr.swkang.nestedrecyclerview.utils.widgets.OnViewClickListener;
 
 /**
  * @author KangSung-Woo
