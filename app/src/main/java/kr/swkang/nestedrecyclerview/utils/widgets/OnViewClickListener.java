@@ -1,8 +1,8 @@
-package kr.swkang.nestedrecyclerview.utils;
+package kr.swkang.nestedrecyclerview.utils.widgets;
 
 import android.support.annotation.NonNull;
 
-import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerViewAdapter;
+import kr.swkang.nestedrecyclerview.utils.widgets.rvs.SwRecyclerViewAdapter;
 
 /**
  * @author KangSung-Woo

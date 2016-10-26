@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package kr.swkang.nestedrecyclerview.utils.viewpagers.pagerindicator;
+package kr.swkang.nestedrecyclerview.utils.widgets.viewpagers.pagerindicator;
 
 import android.support.v4.view.ViewPager;
 

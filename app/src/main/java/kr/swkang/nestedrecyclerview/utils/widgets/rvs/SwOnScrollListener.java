@@ -1,4 +1,4 @@
-package kr.swkang.nestedrecyclerview.utils.rvs;
+package kr.swkang.nestedrecyclerview.utils.widgets.rvs;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

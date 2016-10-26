@@ -10,7 +10,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
-      <kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerView
+      <kr.swkang.nestedrecyclerview.utils.widgets.rvs.SwRecyclerView
          android:id="@+id/main_recyclerview"
          android:layout_width="match_parent"
          android:layout_height="match_parent"

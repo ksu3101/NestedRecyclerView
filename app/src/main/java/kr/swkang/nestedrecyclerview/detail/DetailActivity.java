@@ -4,18 +4,15 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.transition.Explode;
-import android.transition.Fade;
 import android.transition.Transition;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import kr.swkang.nestedrecyclerview.R;
-import kr.swkang.nestedrecyclerview.utils.BaseActivity;
-import kr.swkang.nestedrecyclerview.utils.TransitionListenerAdapter;
+import kr.swkang.nestedrecyclerview.utils.common.BaseActivity;
+import kr.swkang.nestedrecyclerview.utils.widgets.TransitionListenerAdapter;
 import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 
 /**

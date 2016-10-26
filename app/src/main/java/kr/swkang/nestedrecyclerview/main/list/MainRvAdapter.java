@@ -23,13 +23,13 @@ import kr.swkang.nestedrecyclerview.main.list.model.SectionHeader;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodyItems;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.BodySection;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContents;
-import kr.swkang.nestedrecyclerview.utils.OnViewClickListener;
-import kr.swkang.nestedrecyclerview.utils.rvs.SwRecyclerViewAdapter;
-import kr.swkang.nestedrecyclerview.utils.rvs.snappy.SnapRecyclerView;
-import kr.swkang.nestedrecyclerview.utils.rvs.snappy.SnappyLinearLayoutManager;
-import kr.swkang.nestedrecyclerview.utils.viewpagers.InfinitePagerAdapter;
-import kr.swkang.nestedrecyclerview.utils.viewpagers.InfiniteViewPager;
-import kr.swkang.nestedrecyclerview.utils.viewpagers.pagerindicator.ViewPagerIndicator;
+import kr.swkang.nestedrecyclerview.utils.widgets.OnViewClickListener;
+import kr.swkang.nestedrecyclerview.utils.widgets.rvs.SwRecyclerViewAdapter;
+import kr.swkang.nestedrecyclerview.utils.widgets.rvs.snappy.SnapRecyclerView;
+import kr.swkang.nestedrecyclerview.utils.widgets.rvs.snappy.SnappyLinearLayoutManager;
+import kr.swkang.nestedrecyclerview.utils.widgets.viewpagers.InfinitePagerAdapter;
+import kr.swkang.nestedrecyclerview.utils.widgets.viewpagers.InfiniteViewPager;
+import kr.swkang.nestedrecyclerview.utils.widgets.viewpagers.pagerindicator.ViewPagerIndicator;
 
 /**
  * @author KangSung-Woo

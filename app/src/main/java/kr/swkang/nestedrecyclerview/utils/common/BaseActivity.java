@@ -1,4 +1,4 @@
-package kr.swkang.nestedrecyclerview.utils;
+package kr.swkang.nestedrecyclerview.utils.common;
 
 import android.content.Intent;
 import android.os.Build;
