@@ -25,7 +25,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import kr.swkang.snstemplate.utils.common.ConstantParams;
+import kr.swkang.nestedrecyclerview.utils.common.ConstantParams;
+
 
 /**
  * @author KangSung-Woo
@@ -290,7 +291,7 @@ public class StringUtils {
 
         while (m.find()) {
           sb.setSpan(
-              new ForegroundColorSpan(color), m.start(), m.end(), Spanned.SPAN_INCLUSIVE_INCLUSIVE
+            new ForegroundColorSpan(color), m.start(), m.end(), Spanned.SPAN_INCLUSIVE_INCLUSIVE
           );
         }
         return sb;

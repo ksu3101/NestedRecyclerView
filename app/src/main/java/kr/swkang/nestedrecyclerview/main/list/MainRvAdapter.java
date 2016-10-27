@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import kr.swkang.nestedrecyclerview.R;
+import kr.swkang.nestedrecyclerview.main.MainActivityPresenter;
 import kr.swkang.nestedrecyclerview.main.header.HeaderViewPagerAdapter;
 import kr.swkang.nestedrecyclerview.main.list.model.Contents;
 import kr.swkang.nestedrecyclerview.main.list.model.ContentsType;
@@ -36,7 +38,7 @@ import kr.swkang.nestedrecyclerview.utils.widgets.viewpagers.pagerindicator.View
  * @since 2016/07/20
  */
 public class MainRvAdapter
-    extends SwRecyclerViewAdapter<Contents> {
+  extends SwRecyclerViewAdapter<Contents> {
   public static final String TAG             = MainRvAdapter.class.getSimpleName();
   public static final int    FOOTER_LOADMORE = 99;
 
@@ -126,6 +128,14 @@ public class MainRvAdapter
 
         TextView tvDesc = (TextView) viewHolder.getView(R.id.main_item_h_section_tv_desc);
         tvDesc.setText(bodyItems.getDesc() != null ? bodyItems.getDesc() : "");
+
+        ImageButton ibtnFavorites = (ImageButton) viewHolder.getView(R.id.main_item_h_section_ibtn_favorites);
+        if (!ibtnFavorites.isEnabled()) {
+          ibtnFavorites.setEnabled(true);
+        }
+        ibtnFavorites.setImageResource(
+          bodyItems.isFavorites() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off
+        );
 
       }
     }

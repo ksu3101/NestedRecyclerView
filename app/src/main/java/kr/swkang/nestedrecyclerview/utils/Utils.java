@@ -6,24 +6,16 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.location.LocationManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Build;
-import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewConfigurationCompat;
 import android.telephony.TelephonyManager;
 import android.text.Layout;
 import android.text.Selection;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -37,23 +29,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import kr.swkang.snstemplate.utils.mvp.models.UserInfo;
 
 /**
  * @author KangSung-Woo
@@ -63,19 +40,6 @@ public class Utils {
   private static final String TAG = Utils.class.getSimpleName();
 
   private static Toast toast;
-
-  public static UserInfo createDummyUserInfo(@Nullable String profileImgCachedURI,
-                                             @NonNull String userIdEmail,
-                                             @NonNull String password) {
-    final UserInfo userInfo = new UserInfo();
-    userInfo.setCoverImgUrl(profileImgCachedURI);
-    userInfo.setEmail(userIdEmail);
-    return userInfo;
-  }
-
-  public static UserInfo loadDummyUserInfo() {
-    return null;
-  }
 
   /**
    * show Toast message
@@ -305,13 +269,13 @@ public class Utils {
     if (v != null) {
       if (!(v instanceof EditText)) {
         v.setOnTouchListener(
-            new View.OnTouchListener() {
-              @Override
-              public boolean onTouch(View et, MotionEvent event) {
-                hideSoftKeyboard(context, et);
-                return false;
-              }
+          new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View et, MotionEvent event) {
+              hideSoftKeyboard(context, et);
+              return false;
             }
+          }
         );
       }
       if (v instanceof ViewGroup) {
@@ -415,7 +379,7 @@ public class Utils {
     LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     if (locationManager != null) {
       if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-          || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+        || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
         return true;
       }
     }

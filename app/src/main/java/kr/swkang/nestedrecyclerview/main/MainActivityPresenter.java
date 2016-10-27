@@ -26,51 +26,51 @@ import rx.schedulers.Schedulers;
  * @since 2016/07/20
  */
 public class MainActivityPresenter
-    extends BasePresenter {
+  extends BasePresenter {
   private static final String TAG = MainActivityPresenter.class.getSimpleName();
 
   private static String[] imgs       = new String[]{
-      "http://burkdog.cafe24.com/wp/wp-content/uploads/2016/06/rxjk.jpg",
-      "https://d13yacurqjgara.cloudfront.net/users/46315/screenshots/936973/shot.gif",
-      "http://designmodo.com/wp-content/uploads/2013/07/Long-Shadows.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/fox-icon.jpg",
-      "https://d13yacurqjgara.cloudfront.net/users/72548/screenshots/976228/flat-ui-kit.png",
-      "http://designmodo.com/wp-content/uploads/2013/07/clock.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/long.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/man_of_steel_icon.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/safari_icon.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/designmodo_long_shadow.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/m.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/rubee.jpg",
-      "https://d13yacurqjgara.cloudfront.net/users/46315/screenshots/936548/retina.png",
-      "http://designmodo.com/wp-content/uploads/2013/07/iosicons_flat.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/Long-Shadows.jpg",
-      "http://burkdog.cafe24.com/wp/wp-content/uploads/2016/06/rxjk.jpg",
-      "https://d13yacurqjgara.cloudfront.net/users/46315/screenshots/936973/shot.gif",
-      "http://designmodo.com/wp-content/uploads/2013/07/Long-Shadows.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/fox-icon.jpg",
-      "https://d13yacurqjgara.cloudfront.net/users/72548/screenshots/976228/flat-ui-kit.png",
-      "http://designmodo.com/wp-content/uploads/2013/07/clock.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/long.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/man_of_steel_icon.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/safari_icon.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/designmodo_long_shadow.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/m.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/rubee.jpg",
-      "https://d13yacurqjgara.cloudfront.net/users/46315/screenshots/936548/retina.png",
-      "http://designmodo.com/wp-content/uploads/2013/07/iosicons_flat.jpg",
-      "http://designmodo.com/wp-content/uploads/2013/07/Long-Shadows.jpg"
+    "http://burkdog.cafe24.com/wp/wp-content/uploads/2016/06/rxjk.jpg",
+    "https://d13yacurqjgara.cloudfront.net/users/46315/screenshots/936973/shot.gif",
+    "http://designmodo.com/wp-content/uploads/2013/07/Long-Shadows.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/fox-icon.jpg",
+    "https://d13yacurqjgara.cloudfront.net/users/72548/screenshots/976228/flat-ui-kit.png",
+    "http://designmodo.com/wp-content/uploads/2013/07/clock.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/long.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/man_of_steel_icon.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/safari_icon.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/designmodo_long_shadow.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/m.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/rubee.jpg",
+    "https://d13yacurqjgara.cloudfront.net/users/46315/screenshots/936548/retina.png",
+    "http://designmodo.com/wp-content/uploads/2013/07/iosicons_flat.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/Long-Shadows.jpg",
+    "http://burkdog.cafe24.com/wp/wp-content/uploads/2016/06/rxjk.jpg",
+    "https://d13yacurqjgara.cloudfront.net/users/46315/screenshots/936973/shot.gif",
+    "http://designmodo.com/wp-content/uploads/2013/07/Long-Shadows.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/fox-icon.jpg",
+    "https://d13yacurqjgara.cloudfront.net/users/72548/screenshots/976228/flat-ui-kit.png",
+    "http://designmodo.com/wp-content/uploads/2013/07/clock.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/long.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/man_of_steel_icon.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/safari_icon.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/designmodo_long_shadow.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/m.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/rubee.jpg",
+    "https://d13yacurqjgara.cloudfront.net/users/46315/screenshots/936548/retina.png",
+    "http://designmodo.com/wp-content/uploads/2013/07/iosicons_flat.jpg",
+    "http://designmodo.com/wp-content/uploads/2013/07/Long-Shadows.jpg"
   };
   private static String[] txts       = new String[]{
-      "Lose", "away", "offset", "가나다라", "father", "API demo", "Shine on you",
-      "Kids", "Number one", "Plastic", "Bawlings", "Dsco", "Soda pop confusion",
-      "습관", "겨울은 가고", "내 손을 잡아줘", "ordinary joe", "safe and sound",
-      "Lightning", "Refeeling", "Romance", "헤픈엔딩",
-      "Lose", "away", "offset", "가나다라", "father", "API demo", "Shine on you",
-      "Kids", "Number one", "Plastic", "Bawlings", "Dsco", "Soda pop confusion",
+    "Lose", "away", "offset", "가나다라", "father", "API demo", "Shine on you",
+    "Kids", "Number one", "Plastic", "Bawlings", "Dsco", "Soda pop confusion",
+    "습관", "겨울은 가고", "내 손을 잡아줘", "ordinary joe", "safe and sound",
+    "Lightning", "Refeeling", "Romance", "헤픈엔딩",
+    "Lose", "away", "offset", "가나다라", "father", "API demo", "Shine on you",
+    "Kids", "Number one", "Plastic", "Bawlings", "Dsco", "Soda pop confusion",
   };
   private static String[] categories = new String[]{
-      "Game", "Movie", "Utility", "Photo", "Video", "Study", "For kids"
+    "Game", "Movie", "Utility", "Photo", "Video", "Study", "For kids"
   };
   private MainActivity activity;
   private View         view;
@@ -93,64 +93,64 @@ public class MainActivityPresenter
   public void retrieveMainListDatas(final boolean isLoadMore) {
     if (!isLoading) {
       SwObservable observable = new SwObservable(
-          this,
-          Observable.create(
-              new Observable.OnSubscribe<ArrayList<Contents>>() {
-                @Override
-                public void call(Subscriber<? super ArrayList<Contents>> subscriber) {
-                  ArrayList<Contents> result = new ArrayList<>();
+        this,
+        Observable.create(
+          new Observable.OnSubscribe<ArrayList<Contents>>() {
+            @Override
+            public void call(Subscriber<? super ArrayList<Contents>> subscriber) {
+              ArrayList<Contents> result = new ArrayList<>();
 
-                  if (isLoadMore) {
-                    // add dummy body datas
-                    for (int i = 1; i <= 10; i++) {
-                      result.add(getRandomBodyItems(i, new Random()));
-                    }
-                    // some running operations
-                    try {
-                      Thread.sleep(TimeUnit.SECONDS.toMillis(2));
+              if (isLoadMore) {
+                // add dummy body datas
+                for (int i = 1; i <= 10; i++) {
+                  result.add(getRandomBodyItems(i, new Random()));
+                }
+                // some running operations
+                try {
+                  Thread.sleep(TimeUnit.SECONDS.toMillis(2));
 
-                    } catch (InterruptedException ie) {
-                      subscriber.onError(ie);
-                    } finally {
-                      subscriber.onNext(result);
-                    }
-                  }
-                  else {
-                    // refresh list items [ DUMMY DATAS ]
-                    result = retrieveDummyDatas();
-                    subscriber.onNext(result);
-                  }
+                } catch (InterruptedException ie) {
+                  subscriber.onError(ie);
+                } finally {
+                  subscriber.onNext(result);
                 }
               }
-          ).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-      );
-      observable.subscribe(
-          new Subscriber<ArrayList<Contents>>() {
-            @Override
-            public void onCompleted() {
-              isLoading = false;
-              if (view != null && isLoadMore) {
-                view.loadMoreCompleted();
-              }
-            }
-
-            @Override
-            public void onError(Throwable e) {
-              isLoading = false;
-              if (view != null) {
-                view.onError(TAG, e != null ? e.getMessage() : "ERROR");
-                if (isLoadMore) view.loadMoreCompleted();
-              }
-            }
-
-            @Override
-            public void onNext(ArrayList<Contents> resultList) {
-              onCompleted();
-              if (view != null) {
-                view.onRetriveMainListItems(resultList, isLoadMore);
+              else {
+                // refresh list items [ DUMMY DATAS ]
+                result = retrieveDummyDatas();
+                subscriber.onNext(result);
               }
             }
           }
+        ).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+      );
+      observable.subscribe(
+        new Subscriber<ArrayList<Contents>>() {
+          @Override
+          public void onCompleted() {
+            isLoading = false;
+            if (view != null && isLoadMore) {
+              view.loadMoreCompleted();
+            }
+          }
+
+          @Override
+          public void onError(Throwable e) {
+            isLoading = false;
+            if (view != null) {
+              view.onError(TAG, e);
+              if (isLoadMore) view.loadMoreCompleted();
+            }
+          }
+
+          @Override
+          public void onNext(ArrayList<Contents> resultList) {
+            onCompleted();
+            if (view != null) {
+              view.onRetriveMainListItems(resultList, isLoadMore);
+            }
+          }
+        }
       );
       isLoading = true;
       if (view != null) {
@@ -177,7 +177,7 @@ public class MainActivityPresenter
     // [1] get dummy datas
     for (int i = 0; i < imgs.length; i++) {
       firstSectionResult.add(new BodyItems(
-          i + 1, imgs[i], txts[i], ""));
+        i + 1, imgs[i], txts[i], ""));
     }
     BodySection firstSection = new BodySection();
     firstSection.setBodyItemses(firstSectionResult);
@@ -191,7 +191,7 @@ public class MainActivityPresenter
     // [2] get dummy datas
     for (int i = 0; i < imgs.length; i++) {
       secondSectionResult.add(new BodyItems(
-          i + 1, imgs[Math.abs(imgs.length - i - 1)], txts[Math.abs(imgs.length - i - 1)], ""));
+        i + 1, imgs[Math.abs(imgs.length - i - 1)], txts[Math.abs(imgs.length - i - 1)], ""));
     }
     BodySection secondSection = new BodySection();
     secondSection.setBodyItemses(secondSectionResult);
@@ -212,9 +212,55 @@ public class MainActivityPresenter
     return new BodyItems(i, imgs[r.nextInt(imgs.length)], txts[r.nextInt(txts.length)], categories[r.nextInt(categories.length)]);
   }
 
+  public void setFavorites(final boolean fav, final int position) {
+    SwObservable observable = new SwObservable(
+      this,
+      Observable.create(
+        new Observable.OnSubscribe<String>() {
+          @Override
+          public void call(Subscriber<? super String> subscriber) {
+            // some running operations
+            try {
+              Thread.sleep(TimeUnit.SECONDS.toMillis(1));
+
+            } catch (InterruptedException ie) {
+              subscriber.onError(ie);
+            } finally {
+              subscriber.onNext("");
+            }
+          }
+        }
+      ).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+    );
+    observable.subscribe(
+      new Subscriber<String>() {
+        @Override
+        public void onCompleted() {
+        }
+
+        @Override
+        public void onError(Throwable e) {
+          if (view != null) {
+            view.onError(TAG, e);
+          }
+        }
+
+        @Override
+        public void onNext(String s) {
+          if (view != null) {
+            view.onReceiveResultOfFavoritesItem(!fav, position);
+          }
+          onCompleted();
+        }
+      }
+    );
+  }
+
   interface View
-      extends BaseView {
+    extends BaseView {
     void onRetriveMainListItems(@NonNull List<Contents> list, boolean isLoadMore);
+
+    void onReceiveResultOfFavoritesItem(boolean resultFav, int positionOfAdapter);
 
     void startLoadMore();
 

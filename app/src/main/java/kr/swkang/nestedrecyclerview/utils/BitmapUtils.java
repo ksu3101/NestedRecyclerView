@@ -32,7 +32,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import kr.swkang.snstemplate.utils.common.ConstantParams;
+import kr.swkang.nestedrecyclerview.utils.common.ConstantParams;
 
 /**
  * @author KangSung-Woo

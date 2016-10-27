@@ -6,7 +6,6 @@ import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 
 import java.io.UnsupportedEncodingException;
 import java.net.Inet4Address;
@@ -18,9 +17,9 @@ import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
-import kr.swkang.snstemplate.utils.common.ConstantParams;
+import kr.swkang.nestedrecyclerview.utils.common.ConstantParams;
+
 
 /**
  * @author KangSung-Woo

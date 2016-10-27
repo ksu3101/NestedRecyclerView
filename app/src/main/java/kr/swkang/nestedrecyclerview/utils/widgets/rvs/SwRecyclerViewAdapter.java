@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 import kr.swkang.nestedrecyclerview.utils.widgets.OnViewClickListener;
 
 /**
@@ -20,7 +21,7 @@ import kr.swkang.nestedrecyclerview.utils.widgets.OnViewClickListener;
  * @since 2016/07/09
  */
 public abstract class SwRecyclerViewAdapter<T>
-    extends RecyclerView.Adapter<SwRecyclerViewAdapter.ViewHolder> {
+  extends RecyclerView.Adapter<SwRecyclerViewAdapter.ViewHolder> {
   protected List<T>             list;
   protected Context             context;
   protected OnViewClickListener clickListener;
@@ -150,8 +151,8 @@ public abstract class SwRecyclerViewAdapter<T>
   }
 
   public static class ViewHolder
-      extends RecyclerView.ViewHolder
-      implements View.OnClickListener {
+    extends RecyclerView.ViewHolder
+    implements View.OnClickListener {
     private Map<Integer, View>  views;
     private OnViewClickListener clickListener;
     private Object              tag;
@@ -198,7 +199,7 @@ public abstract class SwRecyclerViewAdapter<T>
     @Override
     public void onClick(View v) {
       if (clickListener != null) {
-        clickListener.onClicked(this, getAdapterPosition());
+        clickListener.onClicked(this, v, getAdapterPosition());
       }
     }
 
