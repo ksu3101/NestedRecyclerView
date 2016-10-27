@@ -1,6 +1,7 @@
 package kr.swkang.nestedrecyclerview.utils.widgets;
 
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import kr.swkang.nestedrecyclerview.utils.widgets.rvs.SwRecyclerViewAdapter;
 
@@ -9,5 +10,5 @@ import kr.swkang.nestedrecyclerview.utils.widgets.rvs.SwRecyclerViewAdapter;
  * @since 2016/07/11
  */
 public interface OnViewClickListener {
-  void onClicked(@NonNull SwRecyclerViewAdapter.ViewHolder viewHolder, int position);
+  void onClicked(@NonNull SwRecyclerViewAdapter.ViewHolder viewHolder, @NonNull View clickedView, int position);
 }

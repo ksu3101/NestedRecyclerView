@@ -11,8 +11,8 @@ import kr.swkang.nestedrecyclerview.main.list.model.ContentsType;
  * @since 2016/07/22
  */
 public class BodyItems
-    extends Contents
-    implements Parcelable {
+  extends Contents
+  implements Parcelable {
   public static final Parcelable.Creator<BodyItems> CREATOR = new Parcelable.Creator<BodyItems>() {
     @Override
     public BodyItems createFromParcel(Parcel source) {
@@ -24,10 +24,11 @@ public class BodyItems
       return new BodyItems[size];
     }
   };
-  private int    id;
-  private String thumbnailImgUrl;
-  private String title;
-  private String desc;
+  private int     id;
+  private String  thumbnailImgUrl;
+  private String  title;
+  private String  desc;
+  private boolean isFavorites;
 
   public BodyItems(int id, String thumbnailImgUrl, String title, String desc) {
     super(ContentsType.BODY_HALF);
@@ -35,6 +36,7 @@ public class BodyItems
     this.thumbnailImgUrl = thumbnailImgUrl;
     this.title = title;
     this.desc = desc;
+    this.isFavorites = false;
   }
 
   protected BodyItems(Parcel in) {
@@ -43,6 +45,7 @@ public class BodyItems
     this.thumbnailImgUrl = in.readString();
     this.title = in.readString();
     this.desc = in.readString();
+    this.isFavorites = (in.readInt() == 1);
   }
 
   public int getId() {
@@ -77,6 +80,14 @@ public class BodyItems
     this.desc = desc;
   }
 
+  public boolean isFavorites() {
+    return isFavorites;
+  }
+
+  public void setFavorites(boolean favorites) {
+    this.isFavorites = favorites;
+  }
+
   @Override
   public int describeContents() {
     return 0;
@@ -88,5 +99,6 @@ public class BodyItems
     dest.writeString(this.thumbnailImgUrl);
     dest.writeString(this.title);
     dest.writeString(this.desc);
+    dest.writeInt(this.isFavorites ? 1 : 0);
   }
 }

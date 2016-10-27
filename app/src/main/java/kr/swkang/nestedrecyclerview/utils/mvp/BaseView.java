@@ -6,4 +6,6 @@ package kr.swkang.nestedrecyclerview.utils.mvp;
  */
 public interface BaseView {
   void onError(String tag, String message);
+
+  void onError(String tag, Throwable t);
 }

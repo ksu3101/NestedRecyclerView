@@ -31,8 +31,8 @@ import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 import kr.swkang.nestedrecyclerview.utils.widgets.rvs.SwRecyclerViewAdapter;
 
 public class MainActivity
-    extends BaseActivity
-    implements MainActivityPresenter.View, OnViewClickListener {
+  extends BaseActivity
+  implements MainActivityPresenter.View, OnViewClickListener {
   private static final String TAG = MainActivity.class.getSimpleName();
 
   private static Picasso               picasso;
@@ -54,14 +54,14 @@ public class MainActivity
 
     refreshLayout = (SwipeRefreshLayout) findViewById(R.id.main_swiperefresh);
     refreshLayout.setOnRefreshListener(
-        new SwipeRefreshLayout.OnRefreshListener() {
-          @Override
-          public void onRefresh() {
-            if (presenter != null) {
-              presenter.retrieveMainListDatas(false);
-            }
+      new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+          if (presenter != null) {
+            presenter.retrieveMainListDatas(false);
           }
         }
+      }
     );
 
     rv = (SwRecyclerView) findViewById(R.id.main_recyclerview);
@@ -69,32 +69,32 @@ public class MainActivity
 
     GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
     gridLayoutManager.setSpanSizeLookup(
-        new GridLayoutManager.SpanSizeLookup() {
-          @Override
-          public int getSpanSize(int position) {
-            if (adapter != null) {
-              final int viewType = adapter.getItemViewType(position);
-              if (viewType == HeaderContents.VIEWTYPE_VALUE) {
-                // HEADER
-                return 2;
-              }
-              else if (viewType == BodySection.FULL_VIEWTYPE_VALUE) {
-                // BODY / span 2
-                return 2;
-              }
-              else if (viewType == BodySection.HALF_VIEWTYPE_VALUE) {
-                // BODY / span 1
-                return 1;
-              }
-              else {
-                // FOOTER, SECTION HEADERS
-                return 2;
-              }
+      new GridLayoutManager.SpanSizeLookup() {
+        @Override
+        public int getSpanSize(int position) {
+          if (adapter != null) {
+            final int viewType = adapter.getItemViewType(position);
+            if (viewType == HeaderContents.VIEWTYPE_VALUE) {
+              // HEADER
+              return 2;
             }
-            // default 2
-            return 2;
+            else if (viewType == BodySection.FULL_VIEWTYPE_VALUE) {
+              // BODY / span 2
+              return 2;
+            }
+            else if (viewType == BodySection.HALF_VIEWTYPE_VALUE) {
+              // BODY / span 1
+              return 1;
+            }
+            else {
+              // FOOTER, SECTION HEADERS
+              return 2;
+            }
           }
+          // default 2
+          return 2;
         }
+      }
     );
 
     rv.setLayoutManager(gridLayoutManager);
@@ -109,32 +109,32 @@ public class MainActivity
     rv.setEmptyView(findViewById(R.id.main_emptyview_container));
 
     rv.addOnScrollListener(
-        new SwOnScrollListener(this) {
-          @Override
-          public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            super.onScrolled(recyclerView, dx, dy);
+      new SwOnScrollListener(this) {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+          super.onScrolled(recyclerView, dx, dy);
 
-            if (adapter != null && recyclerView.getLayoutManager() != null && recyclerView.getLayoutManager() instanceof GridLayoutManager) {
-              GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
-              if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
-                // load next page..
-                Log.d(TAG, "///// START LOAD MORE");
-                retrieveMainListDatas(true);
-              }
+          if (adapter != null && recyclerView.getLayoutManager() != null && recyclerView.getLayoutManager() instanceof GridLayoutManager) {
+            GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
+            if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
+              // load next page..
+              Log.d(TAG, "///// START LOAD MORE");
+              retrieveMainListDatas(true);
             }
           }
         }
+      }
     );
 
     TextView tvRefresh = (TextView) findViewById(R.id.main_emptyview_btn_refresh);
     tvRefresh.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            // refresh datas
-            retrieveMainListDatas(false);
-          }
+      new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          // refresh datas
+          retrieveMainListDatas(false);
         }
+      }
     );
 
     // retrieve list datas
@@ -167,6 +167,20 @@ public class MainActivity
   }
 
   @Override
+  public void onReceiveResultOfFavoritesItem(boolean resultFav, int positionOfAdapter) {
+    Log.w(TAG, "// onReceiveResultOfFavoritesItem() resultFav = " + resultFav + ", positionOfAdapter = " + positionOfAdapter);
+    if (adapter != null) {
+      Contents c = adapter.getItem(positionOfAdapter);
+      if (c != null && c instanceof BodyItems) {
+        BodyItems items = (BodyItems) c;
+        items.setFavorites(resultFav);
+
+        adapter.notifyItemChanged(positionOfAdapter);
+      }
+    }
+  }
+
+  @Override
   public void startLoadMore() {
     if (adapter != null) {
       adapter.showLoadMore();
@@ -184,22 +198,29 @@ public class MainActivity
   }
 
   @Override
-  public void onClicked(@NonNull SwRecyclerViewAdapter.ViewHolder viewHolder, int position) {
+  public void onClicked(@NonNull SwRecyclerViewAdapter.ViewHolder viewHolder, @NonNull View clickedView, int position) {
     Log.d(TAG, "// Touched Item [" + position + "]");
     if (viewHolder.getTag() != null) {
       Object viewHolderTag = viewHolder.getTag();
       if (viewHolderTag instanceof String) {
         String tagStr = (String) viewHolderTag;
+
         if (tagStr.equals(MainRvAdapter.TAG)) {
           if (adapter != null) {
             Contents c = adapter.getItem(position);
-            if (c != null) {
-              if (c instanceof BodyItems) {
-                BodyItems bodyItems = (BodyItems) c;
+            if (c != null && c instanceof BodyItems) {
+              BodyItems bodyItems = (BodyItems) c;
+
+              if (clickedView.getId() == R.id.main_item_h_section_ibtn_favorites) {
+                presenter.setFavorites(bodyItems.isFavorites(), position);
+                clickedView.setEnabled(false);
+              }
+
+              else {
                 startActivity_DetailContents(
-                    viewHolder.getView(R.id.main_item_h_section_bg_iv), bodyItems.getThumbnailImgUrl(),
-                    bodyItems.getTitle(),
-                    bodyItems.getDesc()
+                  viewHolder.getView(R.id.main_item_h_section_bg_iv), bodyItems.getThumbnailImgUrl(),
+                  bodyItems.getTitle(),
+                  bodyItems.getDesc()
                 );
                 /*
                 startActivity_DetailContents(
@@ -220,9 +241,9 @@ public class MainActivity
             if (tagObj != null && tagObj instanceof BodyItems) {
               BodyItems bodyItems = (BodyItems) tagObj;
               startActivity_DetailContents(
-                  ivBg, bodyItems.getThumbnailImgUrl(),
-                  bodyItems.getTitle(),
-                  bodyItems.getDesc() != null ? bodyItems.getDesc() : ""
+                ivBg, bodyItems.getThumbnailImgUrl(),
+                bodyItems.getTitle(),
+                bodyItems.getDesc() != null ? bodyItems.getDesc() : ""
               );
               /*
               startActivity_DetailContents(

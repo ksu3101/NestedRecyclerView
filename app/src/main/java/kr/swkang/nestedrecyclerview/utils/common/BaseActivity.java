@@ -59,6 +59,12 @@ public abstract class BaseActivity
     Log.e(tag != null ? tag : "BaseActivity", message != null ? message : "Message is null.");
   }
 
+  @CallSuper
+  @Override
+  public void onError(String tag, Throwable t) {
+    onError(tag, t != null ? t.getMessage() : "ERROR");
+  }
+
   // - - Common methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public final void startActivity_DetailContents(
