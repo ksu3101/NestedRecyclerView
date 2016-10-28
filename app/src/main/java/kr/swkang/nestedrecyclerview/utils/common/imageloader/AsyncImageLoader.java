@@ -74,6 +74,7 @@ public class AsyncImageLoader {
     this.setStoreMemCache = builder.setStoreMemCache;
     this.setStoreDiskCache = builder.setStoreDiskCache;
 
+    this.isNotFoundedInCache = false;
     getBitmapImage(builder.imgUrl, builder.imageView);
   }
 
@@ -123,9 +124,6 @@ public class AsyncImageLoader {
               result = BitmapFactory.decodeStream(bis);
               bis.close();
 
-              isNotFoundedInCache = false;
-            }
-            else {
               isNotFoundedInCache = true;
             }
 

@@ -38,7 +38,7 @@ import kr.swkang.nestedrecyclerview.utils.widgets.viewpagers.pagerindicator.View
  * @since 2016/07/20
  */
 public class MainRvAdapter
-  extends SwRecyclerViewAdapter<Contents> {
+    extends SwRecyclerViewAdapter<Contents> {
   public static final String TAG             = MainRvAdapter.class.getSimpleName();
   public static final int    FOOTER_LOADMORE = 99;
 
@@ -134,7 +134,7 @@ public class MainRvAdapter
           ibtnFavorites.setEnabled(true);
         }
         ibtnFavorites.setImageResource(
-          bodyItems.isFavorites() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off
+            bodyItems.isFavorites() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off
         );
 
       }
