@@ -1,6 +1,7 @@
 package kr.swkang.nestedrecyclerview.utils.widgets.rvs;
 
 import android.content.Context;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ public abstract class SwOnScrollListener
     this.settlingResumeRunnable = null;
   }
 
+  @CallSuper
   @Override
   public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
     if (this.picasso != null) {

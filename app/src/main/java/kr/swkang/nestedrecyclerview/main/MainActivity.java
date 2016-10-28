@@ -31,15 +31,14 @@ import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 import kr.swkang.nestedrecyclerview.utils.widgets.rvs.SwRecyclerViewAdapter;
 
 public class MainActivity
-  extends BaseActivity
-  implements MainActivityPresenter.View, OnViewClickListener {
+    extends BaseActivity
+    implements MainActivityPresenter.View, OnViewClickListener {
   private static final String TAG = MainActivity.class.getSimpleName();
 
-  private static Picasso               picasso;
-  private        MainActivityPresenter presenter;
-  private        SwipeRefreshLayout    refreshLayout;
-  private        SwRecyclerView        rv;
-  private        MainRvAdapter         adapter;
+  private MainActivityPresenter presenter;
+  private SwipeRefreshLayout    refreshLayout;
+  private SwRecyclerView        rv;
+  private MainRvAdapter         adapter;
 
   @Override
   public BasePresenter attachPresenter() {
@@ -54,14 +53,14 @@ public class MainActivity
 
     refreshLayout = (SwipeRefreshLayout) findViewById(R.id.main_swiperefresh);
     refreshLayout.setOnRefreshListener(
-      new SwipeRefreshLayout.OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-          if (presenter != null) {
-            presenter.retrieveMainListDatas(false);
+        new SwipeRefreshLayout.OnRefreshListener() {
+          @Override
+          public void onRefresh() {
+            if (presenter != null) {
+              presenter.retrieveMainListDatas(false);
+            }
           }
         }
-      }
     );
 
     rv = (SwRecyclerView) findViewById(R.id.main_recyclerview);
@@ -69,32 +68,32 @@ public class MainActivity
 
     GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
     gridLayoutManager.setSpanSizeLookup(
-      new GridLayoutManager.SpanSizeLookup() {
-        @Override
-        public int getSpanSize(int position) {
-          if (adapter != null) {
-            final int viewType = adapter.getItemViewType(position);
-            if (viewType == HeaderContents.VIEWTYPE_VALUE) {
-              // HEADER
-              return 2;
+        new GridLayoutManager.SpanSizeLookup() {
+          @Override
+          public int getSpanSize(int position) {
+            if (adapter != null) {
+              final int viewType = adapter.getItemViewType(position);
+              if (viewType == HeaderContents.VIEWTYPE_VALUE) {
+                // HEADER
+                return 2;
+              }
+              else if (viewType == BodySection.FULL_VIEWTYPE_VALUE) {
+                // BODY / span 2
+                return 2;
+              }
+              else if (viewType == BodySection.HALF_VIEWTYPE_VALUE) {
+                // BODY / span 1
+                return 1;
+              }
+              else {
+                // FOOTER, SECTION HEADERS
+                return 2;
+              }
             }
-            else if (viewType == BodySection.FULL_VIEWTYPE_VALUE) {
-              // BODY / span 2
-              return 2;
-            }
-            else if (viewType == BodySection.HALF_VIEWTYPE_VALUE) {
-              // BODY / span 1
-              return 1;
-            }
-            else {
-              // FOOTER, SECTION HEADERS
-              return 2;
-            }
+            // default 2
+            return 2;
           }
-          // default 2
-          return 2;
         }
-      }
     );
 
     rv.setLayoutManager(gridLayoutManager);
@@ -109,32 +108,32 @@ public class MainActivity
     rv.setEmptyView(findViewById(R.id.main_emptyview_container));
 
     rv.addOnScrollListener(
-      new SwOnScrollListener(this) {
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-          super.onScrolled(recyclerView, dx, dy);
+        new SwOnScrollListener(this) {
+          @Override
+          public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
 
-          if (adapter != null && recyclerView.getLayoutManager() != null && recyclerView.getLayoutManager() instanceof GridLayoutManager) {
-            GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
-            if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
-              // load next page..
-              Log.d(TAG, "///// START LOAD MORE");
-              retrieveMainListDatas(true);
+            if (adapter != null && recyclerView.getLayoutManager() != null && recyclerView.getLayoutManager() instanceof GridLayoutManager) {
+              GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
+              if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
+                // load next page..
+                Log.d(TAG, "///// START LOAD MORE");
+                retrieveMainListDatas(true);
+              }
             }
           }
         }
-      }
     );
 
     TextView tvRefresh = (TextView) findViewById(R.id.main_emptyview_btn_refresh);
     tvRefresh.setOnClickListener(
-      new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          // refresh datas
-          retrieveMainListDatas(false);
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            // refresh datas
+            retrieveMainListDatas(false);
+          }
         }
-      }
     );
 
     // retrieve list datas
@@ -157,7 +156,6 @@ public class MainActivity
       }
       else {
         //Toast.makeText(MainActivity.this, "Refresh Complete", Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "onRetriveMainListItems() // Refresh Complete. ");
         adapter.setItem(list, true);
       }
     }
@@ -168,7 +166,6 @@ public class MainActivity
 
   @Override
   public void onReceiveResultOfFavoritesItem(boolean resultFav, int positionOfAdapter) {
-    Log.w(TAG, "// onReceiveResultOfFavoritesItem() resultFav = " + resultFav + ", positionOfAdapter = " + positionOfAdapter);
     if (adapter != null) {
       Contents c = adapter.getItem(positionOfAdapter);
       if (c != null && c instanceof BodyItems) {
@@ -200,6 +197,7 @@ public class MainActivity
   @Override
   public void onClicked(@NonNull SwRecyclerViewAdapter.ViewHolder viewHolder, @NonNull View clickedView, int position) {
     Log.d(TAG, "// Touched Item [" + position + "]");
+
     if (viewHolder.getTag() != null) {
       Object viewHolderTag = viewHolder.getTag();
       if (viewHolderTag instanceof String) {
@@ -218,9 +216,9 @@ public class MainActivity
 
               else {
                 startActivity_DetailContents(
-                  viewHolder.getView(R.id.main_item_h_section_bg_iv), bodyItems.getThumbnailImgUrl(),
-                  bodyItems.getTitle(),
-                  bodyItems.getDesc()
+                    viewHolder.getView(R.id.main_item_h_section_bg_iv), bodyItems.getThumbnailImgUrl(),
+                    bodyItems.getTitle(),
+                    bodyItems.getDesc()
                 );
                 /*
                 startActivity_DetailContents(
@@ -241,9 +239,9 @@ public class MainActivity
             if (tagObj != null && tagObj instanceof BodyItems) {
               BodyItems bodyItems = (BodyItems) tagObj;
               startActivity_DetailContents(
-                ivBg, bodyItems.getThumbnailImgUrl(),
-                bodyItems.getTitle(),
-                bodyItems.getDesc() != null ? bodyItems.getDesc() : ""
+                  ivBg, bodyItems.getThumbnailImgUrl(),
+                  bodyItems.getTitle(),
+                  bodyItems.getDesc() != null ? bodyItems.getDesc() : ""
               );
               /*
               startActivity_DetailContents(
