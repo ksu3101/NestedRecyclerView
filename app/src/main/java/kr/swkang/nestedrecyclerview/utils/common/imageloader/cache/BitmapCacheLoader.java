@@ -13,6 +13,8 @@ public class BitmapCacheLoader {
   private BitmapMemLruCache  lruCache;
   private BitmapDiskLruCache diskLruCache;
 
+  private int memCacheSize;
+
   private static class Singleton {
     private static final BitmapCacheLoader instance = new BitmapCacheLoader();
   }
@@ -22,6 +24,10 @@ public class BitmapCacheLoader {
 
   public static BitmapCacheLoader getInstance() {
     return Singleton.instance;
+  }
+
+  public void initializeCache(int memCacheSize) {
+    this.memCacheSize = memCacheSize;
   }
 
   @Nullable
