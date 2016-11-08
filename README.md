@@ -28,6 +28,7 @@ Nested RecyclerView example project.
 - [x] apply `Empty View`. 
 - [x] enable `Snappy` Horizontal RecyclerView scroll(fling). [참고](http://stackoverflow.com/questions/26370289/snappy-scrolling-in-recyclerview)
 - [x] apply `Material Design Shared view Transition effect`.   
+- [ ] bitmap image chache. (Memory cache, Disk cache)
 - [ ] snappy items (example like `Section Header`)  
 - [ ] add disconnected by internet view. 
 
