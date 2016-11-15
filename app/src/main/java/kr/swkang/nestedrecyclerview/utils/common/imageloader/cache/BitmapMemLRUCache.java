@@ -14,10 +14,10 @@ import java.io.File;
  */
 
 public class BitmapMemLruCache
-  implements BitmapCache {
+    implements BitmapCache {
   private static final String TAG = BitmapMemLruCache.class.getSimpleName();
 
-  private LruCache<String, Bitmap> lruCache;
+  private final LruCache<String, Bitmap> lruCache;
 
   public BitmapMemLruCache(int cacheMaxSize) {
     this.lruCache = new LruCache<>(cacheMaxSize);
@@ -25,17 +25,25 @@ public class BitmapMemLruCache
 
   @Override
   public void addBitmap(@NonNull String key, @NonNull Bitmap bitmap) {
-    lruCache.put(key, bitmap);
+    synchronized (lruCache) {
+      if (lruCache.get(key) == null) {
+        lruCache.put(key, bitmap);
+      }
+    }
   }
 
   @Override
   public void addBitmap(@NonNull String key, @NonNull File bitmapFile) {
-    if(!bitmapFile.exists()) {
+    if (!bitmapFile.exists()) {
       Log.w(TAG, bitmapFile.getAbsolutePath() + " file is not exists.");
       return;
     }
     final Bitmap bitmap = BitmapFactory.decodeFile(bitmapFile.getAbsolutePath());
-    lruCache.put(key, bitmap);
+    if (bitmap != null) {
+      synchronized (lruCache) {
+        lruCache.put(key, bitmap);
+      }
+    }
   }
 
   @Override

@@ -3,7 +3,6 @@ package kr.swkang.nestedrecyclerview.utils.mvp;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
-import rx.Subscriber;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 

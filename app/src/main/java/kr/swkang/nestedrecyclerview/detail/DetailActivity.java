@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
 import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.utils.common.BaseActivity;
 import kr.swkang.nestedrecyclerview.utils.widgets.TransitionListenerAdapter;
@@ -30,6 +31,10 @@ public class DetailActivity
 
   private DetailActivityPresenter presenter;
 
+  @BindView(R.id.detail_tv_title)    TextView  tvTitle;
+  @BindView(R.id.detail_tv_category) TextView  tvCategory;
+  @BindView(R.id.detail_iv)          ImageView imageView;
+
   @Override
   public BasePresenter attachPresenter() {
     presenter = new DetailActivityPresenter();
@@ -37,9 +42,13 @@ public class DetailActivity
   }
 
   @Override
+  public int getLayoutResId() {
+    return R.layout.detail_activity;
+  }
+
+  @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.detail_activity);
 
     Intent intent = getIntent();
 
@@ -47,19 +56,16 @@ public class DetailActivity
     final String title = intent.getStringExtra(BUNDLE_KEY_CONTENTS_TITLE);
     final String category = intent.getStringExtra(BUNDLE_KEY_CONTENTS_CATEGORY);
 
-    final TextView tvTitle = (TextView) findViewById(R.id.detail_tv_title);
     tvTitle.setText(title != null ? title : "");
 
-    final TextView tvCategory = (TextView) findViewById(R.id.detail_tv_category);
     tvCategory.setText(category != null ? category : "");
 
-    final ImageView iv = (ImageView) findViewById(R.id.detail_iv);
     if (imgThumbnail != null) {
       Picasso.with(this)
              .load(imgThumbnail)
              .fit()
              .centerCrop()
-             .into(iv);
+             .into(imageView);
     }
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

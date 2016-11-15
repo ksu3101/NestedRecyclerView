@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.main.list.MainRvAdapter;
 import kr.swkang.nestedrecyclerview.main.list.MainRvItemDecoration;
@@ -36,9 +37,12 @@ public class MainActivity
   private static final String TAG = MainActivity.class.getSimpleName();
 
   private MainActivityPresenter presenter;
-  private SwipeRefreshLayout    refreshLayout;
-  private SwRecyclerView        rv;
-  private MainRvAdapter         adapter;
+
+  @BindView(R.id.main_emptyview_btn_refresh) TextView           tvRefresh;
+  @BindView(R.id.main_swiperefresh)          SwipeRefreshLayout refreshLayout;
+  @BindView(R.id.main_recyclerview)          SwRecyclerView     rv;
+
+  private MainRvAdapter adapter;
 
   @Override
   public BasePresenter attachPresenter() {
@@ -47,11 +51,14 @@ public class MainActivity
   }
 
   @Override
+  public int getLayoutResId() {
+    return R.layout.main_activity;
+  }
+
+  @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.main_activity);
 
-    refreshLayout = (SwipeRefreshLayout) findViewById(R.id.main_swiperefresh);
     refreshLayout.setOnRefreshListener(
         new SwipeRefreshLayout.OnRefreshListener() {
           @Override
@@ -63,7 +70,6 @@ public class MainActivity
         }
     );
 
-    rv = (SwRecyclerView) findViewById(R.id.main_recyclerview);
     rv.setHasFixedSize(false);
 
     GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
@@ -125,7 +131,6 @@ public class MainActivity
         }
     );
 
-    TextView tvRefresh = (TextView) findViewById(R.id.main_emptyview_btn_refresh);
     tvRefresh.setOnClickListener(
         new View.OnClickListener() {
           @Override
