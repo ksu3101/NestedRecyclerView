@@ -14,19 +14,13 @@ import android.util.Log;
 public class BitmapCacheLoader {
   private static final String TAG = BitmapCacheLoader.class.getSimpleName();
 
-  private static BitmapCacheLoader  instance;
+  private static BitmapCacheLoader  instance = new BitmapCacheLoader();
+
   private static BitmapMemLruCache  lruCache;
   private static BitmapDiskLruCache diskLruCache;
   private static boolean showingLog = true;
 
   public static BitmapCacheLoader getInstance() {
-    if (instance == null) {
-      synchronized (BitmapCacheLoader.class) {
-        if (instance == null) {
-          instance = new BitmapCacheLoader();
-        }
-      }
-    }
     return instance;
   }
 

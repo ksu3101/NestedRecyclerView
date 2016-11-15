@@ -12,21 +12,23 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
 import kr.swkang.nestedrecyclerview.R;
 import kr.swkang.nestedrecyclerview.main.MainActivity;
 import kr.swkang.nestedrecyclerview.main.list.model.subcontents.HeaderContentsItem;
+import kr.swkang.nestedrecyclerview.utils.common.BaseFragment;
+import kr.swkang.nestedrecyclerview.utils.mvp.BasePresenter;
 
 /**
  * @author KangSung-Woo
  * @since 2016/07/21
  */
 public class HeaderFragment
-    extends Fragment {
+    extends BaseFragment {
   public static final String TAG                = HeaderFragment.class.getSimpleName();
   public static final String BUNDLE_HEADER_ITEM = TAG + "_BUNDLE_HEADER_ITEM";
 
-  private MainActivity parentActivity;
-  private View         rootView;
+  @BindView(R.id.main_item_h_vp_child_iv) ImageView imageView;
 
   public static HeaderFragment newInstance(Bundle args) {
     HeaderFragment fragment = new HeaderFragment();
@@ -34,12 +36,15 @@ public class HeaderFragment
     return fragment;
   }
 
+  @Nullable
   @Override
-  public void onAttach(Activity activity) {
-    if (activity != null && activity instanceof MainActivity) {
-      this.parentActivity = (MainActivity) activity;
-    }
-    super.onAttach(activity);
+  public BasePresenter attachPresenter() {
+    return null;
+  }
+
+  @Override
+  public int getLayoutResId() {
+    return R.layout.main_item_header_vp_childfragment;
   }
 
   @Override
@@ -48,18 +53,9 @@ public class HeaderFragment
     setRetainInstance(true);
   }
 
-  @Nullable
-  @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    rootView = inflater.inflate(R.layout.main_item_header_vp_childfragment, container, false);
-    return rootView;
-  }
-
   @Override
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
-
-    ImageView iv = (ImageView) rootView.findViewById(R.id.main_item_h_vp_child_iv);
 
     HeaderContentsItem item = getArguments().getParcelable(BUNDLE_HEADER_ITEM);
     if (item != null) {
@@ -68,7 +64,7 @@ public class HeaderFragment
                .load(item.getImageUrl())
                .fit()
                .centerCrop()
-               .into(iv);
+               .into(imageView);
       }
     }
 
